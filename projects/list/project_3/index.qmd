@@ -1,0 +1,10 @@
+---
+title: "lala"
+description: "lalalal"
+author: "Alina Bolshakova"
+date: 2026-04-10
+image: cover3.jpg
+categories: [Python, Finance, Data Visualisation]
+---
+
+Project content goes here...

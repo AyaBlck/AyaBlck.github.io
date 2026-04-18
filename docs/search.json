@@ -1,5 +1,68 @@
 [
   {
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Financial Data Analysis\n\n\n\nPython\n\nFinance\n\nData Visualisation\n\n\n\nExploring trends in financial markets using Python.\n\n\n\nApr 10, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nlala\n\n\n\nPython\n\nFinance\n\nData Visualisation\n\n\n\nlalalal\n\n\n\nApr 10, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nChurn Analysis for Bank Customers\n\n\n\nPython\n\nMachine Learning\n\nData Visualisation\n\n\n\nUsing Python to predict customer churn in the banking sector, leveraging machine learning techniques and data visualisation.\n\n\n\nApr 10, 2026\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Alina Bolshakova",
+    "section": "",
+    "text": "Welcome to my portfolio! Here you will find my projects, research, and insights at the intersection of finance and data science.\nLearn more about me →"
+  },
+  {
+    "objectID": "projects/list/project_1/index.html",
+    "href": "projects/list/project_1/index.html",
+    "title": "Churn Analysis for Bank Customers",
+    "section": "",
+    "text": "This project analyses customer churn in the banking sector — identifying key factors that influence whether a customer leaves their bank. Using machine learning models, we predict churn risk and provide actionable insights for customer retention.\n View full notebook on GitHub"
+  },
+  {
+    "objectID": "projects/list/project_1/index.html#overview",
+    "href": "projects/list/project_1/index.html#overview",
+    "title": "Churn Analysis for Bank Customers",
+    "section": "",
+    "text": "This project analyses customer churn in the banking sector — identifying key factors that influence whether a customer leaves their bank. Using machine learning models, we predict churn risk and provide actionable insights for customer retention.\n View full notebook on GitHub"
+  },
+  {
+    "objectID": "projects/list/project_1/index.html#data-loading-exploration",
+    "href": "projects/list/project_1/index.html#data-loading-exploration",
+    "title": "Churn Analysis for Bank Customers",
+    "section": "Data Loading & Exploration",
+    "text": "Data Loading & Exploration\n\n\nCode\nimport pandas as pd\nimport seaborn as sns\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport warnings\nwarnings.filterwarnings('ignore')\nsns.set_style('whitegrid')\n\nbank_data = pd.read_csv(\"bank_new_dataset.csv\")\nbank_data.head()\n\n\n\n\n\n\n\n\n\nuserid\nscore\ncity\ngender\nage\nequity\nbalance\nproducts\ncredit_card\nlast_activity\nsalary\nchurn\n\n\n\n\n0\n258835\n838.0\nРостов\nЖ\n32\n1\n377652.29\n2\n0\n1\n105665.06\n1\n\n\n1\n96660\n845.0\nРостов\nЖ\n31\n3\n214980.98\n5\n0\n1\n62058.62\n0\n\n\n2\n99838\n869.0\nРостов\nЖ\n30\n4\n467040.46\n2\n1\n1\n156945.23\n1\n\n\n3\n216099\n856.0\nРыбинск\nЖ\n25\n4\n475727.88\n4\n0\n1\n19502.68\n0\n\n\n4\n120240\n873.0\nРыбинск\nЖ\n37\n3\n1350858.40\n4\n0\n1\n119804.41\n0"
+  },
+  {
+    "objectID": "projects/list/project_1/index.html#data-cleaning",
+    "href": "projects/list/project_1/index.html#data-cleaning",
+    "title": "Churn Analysis for Bank Customers",
+    "section": "Data Cleaning",
+    "text": "Data Cleaning\n\n\nCode\nb_data = bank_data[(bank_data['balance'] &lt; 2300000) | (bank_data['balance'].isna())]\nb_data = b_data[b_data['salary'] &lt; 300000]\nb_data.head()\n\n\n\n\n\n\n\n\n\nuserid\nscore\ncity\ngender\nage\nequity\nbalance\nproducts\ncredit_card\nlast_activity\nsalary\nchurn\n\n\n\n\n0\n258835\n838.0\nРостов\nЖ\n32\n1\n377652.29\n2\n0\n1\n105665.06\n1\n\n\n1\n96660\n845.0\nРостов\nЖ\n31\n3\n214980.98\n5\n0\n1\n62058.62\n0\n\n\n2\n99838\n869.0\nРостов\nЖ\n30\n4\n467040.46\n2\n1\n1\n156945.23\n1\n\n\n3\n216099\n856.0\nРыбинск\nЖ\n25\n4\n475727.88\n4\n0\n1\n19502.68\n0\n\n\n4\n120240\n873.0\nРыбинск\nЖ\n37\n3\n1350858.40\n4\n0\n1\n119804.41\n0"
+  },
+  {
+    "objectID": "projects/list/project_1/index.html#key-findings",
+    "href": "projects/list/project_1/index.html#key-findings",
+    "title": "Churn Analysis for Bank Customers",
+    "section": "Key Findings",
+    "text": "Key Findings\n\n\n\n\n\n\nTipMain Insights\n\n\n\n\nOlder customers with higher balances were more likely to churn\nCredit score alone was not a strong predictor of churn\nTenure played a significant role in customer retention"
+  },
+  {
+    "objectID": "projects/list/project_1/index.html#methodology",
+    "href": "projects/list/project_1/index.html#methodology",
+    "title": "Churn Analysis for Bank Customers",
+    "section": "Methodology",
+    "text": "Methodology\nThe analysis followed these steps:\n\nData cleaning and preprocessing\nExploratory data analysis with interactive visualisations\nFeature engineering\nModel training and evaluation\n\n\n“The goal is not just to predict churn, but to understand why customers leave.”"
+  },
+  {
+    "objectID": "projects/list/project_1/index.html#results",
+    "href": "projects/list/project_1/index.html#results",
+    "title": "Churn Analysis for Bank Customers",
+    "section": "Results",
+    "text": "Results\n\nThis project demonstrates the application of data science techniques to solve real-world business problems in the financial sector."
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -42,10 +105,73 @@
     "text": "Beyond Work\nWhen I’m not crunching numbers, you’ll find me exploring Dublin, reading about behavioural economics, or experimenting with data visualisation techniques to tell compelling stories with data.\n\nFeel free to connect with me on LinkedIn or check out my work on GitHub."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Alina Bolshakova",
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact",
     "section": "",
-    "text": "Welcome to my portfolio! Here you will find my projects, research, and insights at the intersection of finance and data science.\nLearn more about me →"
+    "text": "I’m always open to connecting with fellow professionals, discussing data science, or exploring collaboration opportunities.\n\n\n\n\n alinabolshakovaa@gmail.com\n LinkedIn\n GitHub\n\n\n\n\n Dublin, Ireland"
+  },
+  {
+    "objectID": "contact.html#get-in-touch",
+    "href": "contact.html#get-in-touch",
+    "title": "Contact",
+    "section": "",
+    "text": "I’m always open to connecting with fellow professionals, discussing data science, or exploring collaboration opportunities.\n\n\n\n\n alinabolshakovaa@gmail.com\n LinkedIn\n GitHub\n\n\n\n\n Dublin, Ireland"
+  },
+  {
+    "objectID": "contact.html#references",
+    "href": "contact.html#references",
+    "title": "Contact",
+    "section": "References",
+    "text": "References\nAvailable upon request. Please feel free to reach out via email or LinkedIn."
+  },
+  {
+    "objectID": "reflection.html",
+    "href": "reflection.html",
+    "title": "Reflection",
+    "section": "",
+    "text": "This module has been a transformative experience, taking me from a finance professional with limited coding experience to someone who can build a website, analyse data with Python, and manage projects with Git."
+  },
+  {
+    "objectID": "reflection.html#my-learning-journey",
+    "href": "reflection.html#my-learning-journey",
+    "title": "Reflection",
+    "section": "",
+    "text": "This module has been a transformative experience, taking me from a finance professional with limited coding experience to someone who can build a website, analyse data with Python, and manage projects with Git."
+  },
+  {
+    "objectID": "reflection.html#technical-skills-acquired",
+    "href": "reflection.html#technical-skills-acquired",
+    "title": "Reflection",
+    "section": "Technical Skills Acquired",
+    "text": "Technical Skills Acquired\n\nGit & Version Control\nBefore this module, I had never used Git. Learning to commit, push, and manage repositories was initially challenging, but it quickly became second nature. Understanding version control has changed how I think about managing work — not just code, but any project that evolves over time.\n\n\n\n\n\n\nNoteKey Takeaway\n\n\n\nGit is not just a tool for developers — it’s a mindset for tracking progress and collaborating effectively.\n\n\n\n\nQuarto & Web Development\nBuilding this website from scratch taught me how content, structure, and design come together. Learning YAML configuration, SCSS styling, and Markdown formatting gave me a new appreciation for web development. Customising themes and creating a cohesive visual identity was one of the most rewarding parts of this project.\n\n\nPython & Data Science\nMy Python skills grew significantly through the projects in this module. Moving from basic scripts to building interactive visualisations with Plotly and applying machine learning models was a steep but rewarding learning curve."
+  },
+  {
+    "objectID": "reflection.html#challenges-how-i-overcame-them",
+    "href": "reflection.html#challenges-how-i-overcame-them",
+    "title": "Reflection",
+    "section": "Challenges & How I Overcame Them",
+    "text": "Challenges & How I Overcame Them\n\n“Every error message is a lesson in disguise.”\n\nOne of the biggest challenges was understanding the relationship between Git, GitHub, and VS Code. Early on, I accidentally pushed files to the wrong repository and had to learn how to fix repository structures. This taught me the importance of understanding your tools before using them.\nAnother challenge was getting GitHub Pages to work correctly — dealing with Jekyll conflicts, folder structures, and deployment settings required patience and systematic debugging."
+  },
+  {
+    "objectID": "reflection.html#connecting-to-my-professional-goals",
+    "href": "reflection.html#connecting-to-my-professional-goals",
+    "title": "Reflection",
+    "section": "Connecting to My Professional Goals",
+    "text": "Connecting to My Professional Goals\nAs a finance professional transitioning into data science, the skills from this module are directly applicable to my career goals:\n\nData storytelling — presenting insights through interactive visualisations\nAutomation — using Python to streamline repetitive financial analysis tasks\nProfessional presence — having a portfolio website to showcase my work\nCollaboration — using Git for team projects and version control\n\n\n\n\n\n\n\nTipLooking Forward\n\n\n\nI plan to continue developing my data science skills, focusing on machine learning applications in finance, and contributing to open-source projects. This website will serve as a living portfolio that grows with my career."
+  },
+  {
+    "objectID": "reflection.html#what-i-would-do-differently",
+    "href": "reflection.html#what-i-would-do-differently",
+    "title": "Reflection",
+    "section": "What I Would Do Differently",
+    "text": "What I Would Do Differently\nIf I were to start this module again, I would:\n\nSet up my Git repository structure correctly from the beginning\nSpend more time planning the website design before coding\nStart the Python projects earlier to allow more time for experimentation"
+  },
+  {
+    "objectID": "reflection.html#final-thoughts",
+    "href": "reflection.html#final-thoughts",
+    "title": "Reflection",
+    "section": "Final Thoughts",
+    "text": "Final Thoughts\nThis module has given me the confidence to bridge the gap between finance and technology. The combination of technical skills and professional presentation is something I will carry forward into every future project.\n\n“The best way to predict the future is to create it.” — Peter Drucker"
   }
 ]

@@ -1,0 +1,10 @@
+---
+title: "Financial Data Analysis"
+description: "Exploring trends in financial markets using Python."
+author: "Alina Bolshakova"
+date: 2026-04-10
+image: cover2.jpg
+categories: [Python, Finance, Data Visualisation]
+---
+
+Project content goes here...

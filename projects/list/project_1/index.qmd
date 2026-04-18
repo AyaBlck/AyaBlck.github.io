@@ -1,0 +1,69 @@
+---
+title: "Churn Analysis for Bank Customers"
+description: "Using Python to predict customer churn in the banking sector, leveraging machine learning techniques and data visualisation."
+author: "Alina Bolshakova"
+date: 2026-04-10
+image: /images/project_1.png
+categories: [Python, Machine Learning, Data Visualisation]
+code-fold: true
+code-tools: true
+---
+
+## Overview
+
+This project analyses customer churn in the banking sector — identifying key factors that influence whether a customer leaves their bank. Using machine learning models, we predict churn risk and provide actionable insights for customer retention.
+
+{{< fa brands github >}} [View full notebook on GitHub](https://github.com/AyaBlck/Python_Projects/blob/main/bank_churn.ipynb){target=_blank}
+
+## Data Loading & Exploration
+
+```{python}
+#| error: true
+
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+import warnings
+warnings.filterwarnings('ignore')
+sns.set_style('whitegrid')
+
+bank_data = pd.read_csv("bank_new_dataset.csv")
+bank_data.head()
+```
+
+## Data Cleaning
+
+```{python}
+#| error: true
+
+b_data = bank_data[(bank_data['balance'] < 2300000) | (bank_data['balance'].isna())]
+b_data = b_data[b_data['salary'] < 300000]
+b_data.head()
+```
+
+## Key Findings
+
+::: {.callout-tip}
+## Main Insights
+- Older customers with higher balances were more likely to churn
+- Credit score alone was not a strong predictor of churn
+- Tenure played a significant role in customer retention
+:::
+
+## Methodology
+
+The analysis followed these steps:
+
+1. Data cleaning and preprocessing
+2. Exploratory data analysis with interactive visualisations
+3. Feature engineering
+4. Model training and evaluation
+
+> "The goal is not just to predict churn, but to understand *why* customers leave."
+
+## Results
+
+---
+
+*This project demonstrates the application of data science techniques to solve real-world business problems in the financial sector.*
