@@ -1,0 +1,86 @@
+---
+title: "Reflection"
+---
+
+## My Learning Journey
+
+This module has been a transformative experience, taking me from a finance professional with limited coding experience to someone who can build a website, analyse data with Python, and manage projects with Git.
+
+## Technical Skills Acquired
+
+### Git & Version Control
+
+Before this module, I had never used Git. Learning to commit, push, and manage repositories was initially challenging, but it quickly became second nature. Understanding version control has changed how I think about managing work — not just code, but any project that evolves over time.
+
+::: {.callout-note}
+## Key Takeaway
+Git is not just a tool for developers — it's a mindset for tracking progress and collaborating effectively.
+:::
+
+### Quarto & Web Development
+
+Building this website from scratch taught me how content, structure, and design come together. Learning YAML configuration, SCSS styling, and Markdown formatting gave me a new appreciation for web development. Customising themes and creating a cohesive visual identity was one of the most rewarding parts of this project.
+
+### Python & Data Science
+
+My Python skills grew significantly through the projects in this module. Moving from basic scripts to building interactive visualisations with Plotly and applying machine learning models was a steep but rewarding learning curve.
+
+```{python}
+#| echo: false
+
+import plotly.graph_objects as go
+
+skills = ['Git', 'Quarto', 'Python', 'Data Viz', 'SCSS/CSS', 'Markdown']
+before = [1, 0, 2, 1, 0, 1]
+after = [7, 8, 7, 8, 6, 9]
+
+fig = go.Figure()
+fig.add_trace(go.Bar(name='Before Module', x=skills, y=before, marker_color='#B8B4AF'))
+fig.add_trace(go.Bar(name='After Module', x=skills, y=after, marker_color='#8C7A6B'))
+fig.update_layout(
+    title='Skills Development: Before vs After',
+    yaxis_title='Confidence Level (1-10)',
+    barmode='group',
+    plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)'
+)
+fig.show()
+```
+
+## Challenges & How I Overcame Them
+
+> "Every error message is a lesson in disguise."
+
+One of the biggest challenges was understanding the relationship between Git, GitHub, and VS Code. Early on, I accidentally pushed files to the wrong repository and had to learn how to fix repository structures. This taught me the importance of understanding your tools before using them.
+
+Another challenge was getting GitHub Pages to work correctly — dealing with Jekyll conflicts, folder structures, and deployment settings required patience and systematic debugging.
+
+## Connecting to My Professional Goals
+
+As a finance professional transitioning into data science, the skills from this module are directly applicable to my career goals:
+
+- **Data storytelling** — presenting insights through interactive visualisations
+- **Automation** — using Python to streamline repetitive financial analysis tasks
+- **Professional presence** — having a portfolio website to showcase my work
+- **Collaboration** — using Git for team projects and version control
+
+::: {.callout-tip}
+## Looking Forward
+I plan to continue developing my data science skills, focusing on machine learning applications in finance, and contributing to open-source projects. This website will serve as a living portfolio that grows with my career.
+:::
+
+## What I Would Do Differently
+
+If I were to start this module again, I would:
+
+1. Set up my Git repository structure correctly from the beginning
+2. Spend more time planning the website design before coding
+3. Start the Python projects earlier to allow more time for experimentation
+
+## Final Thoughts
+
+This module has given me the confidence to bridge the gap between finance and technology. The combination of technical skills and professional presentation is something I will carry forward into every future project.
+
+---
+
+*"The best way to predict the future is to create it."* — Peter Drucker
