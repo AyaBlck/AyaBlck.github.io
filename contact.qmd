@@ -1,0 +1,35 @@
+---
+title: "Contact"
+---
+
+## Get in Touch
+
+I'm always open to connecting with fellow professionals, discussing data science, or exploring collaboration opportunities.
+
+:::: {.columns}
+::: {.column width="50%"}
+
+### Contact Information
+
+{{< fa envelope >}} [alinabolshakovaa@gmail.com](mailto:alinabolshakovaa@gmail.com)
+
+{{< fa brands linkedin >}} [LinkedIn](https://www.linkedin.com/in/alina-bolshakova/){target=_blank}
+
+{{< fa brands github >}} [GitHub](https://github.com/AyaBlck){target=_blank}
+
+:::
+
+::: {.column width="50%"}
+
+### Location
+
+{{< fa location-dot >}} Dublin, Ireland
+
+:::
+::::
+
+---
+
+## References
+
+Available upon request. Please feel free to reach out via email or LinkedIn.
