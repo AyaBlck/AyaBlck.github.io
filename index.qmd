@@ -1,0 +1,21 @@
+---
+title: "Alina Bolshakova"
+image: images/profile1.jpg
+about:
+  template: broadside
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/alina-bolshakova/
+      target: _blank
+    - text: "{{< fa brands github-alt >}} GitHub"
+      href: https://github.com/AyaBlck
+      target: _blank
+    - icon: envelope
+      text: Email
+      href: mailto:alinabolshakovaa@gmail.com
+---
+
+Welcome to my portfolio! Here you will find my projects, research, and insights at the intersection of finance and data science.
+
+[Learn more about me →](about.qmd)

@@ -1,0 +1,502 @@
+/*-- scss:defaults --*/
+
+// === ELEGANT MINIMALIST — EDITORIAL PORTFOLIO ===
+
+// Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap');
+
+// Core palette
+$off-white: #FAFAF7;
+$warm-cream: #F5F0EB;
+$soft-beige: #EDE8E1;
+$charcoal: #2A2A2A;
+$dark-text: #1A1A1A;
+$mid-gray: #6B6B6B;
+$light-gray: #B8B4AF;
+$accent-brown: #8C7A6B;
+$accent-dark: #5C4F43;
+$link-hover: #A08B79;
+
+// Base document colors
+$body-bg: $off-white;
+$body-color: $charcoal;
+$navbar-bg: $off-white;
+$navbar-fg: $dark-text;
+$navbar-hl: $accent-brown;
+$footer-bg: $dark-text;
+$link-color: $accent-dark;
+
+// Code
+$code-bg: $warm-cream;
+$code-color: $accent-dark;
+
+// Typography
+$font-family-sans-serif: 'Outfit', sans-serif;
+$headings-font-family: 'Cormorant Garamond', serif;
+$font-size-base: 1rem;
+
+/*-- scss:rules --*/
+
+// === GLOBAL ===
+// === GLOBAL ===
+body {
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+// === TYPOGRAPHY ===
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: $dark-text;
+}
+
+h1 {
+  font-size: 3.2rem !important;
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 2.2rem !important;
+  font-weight: 400;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid $soft-beige;
+}
+
+h3 {
+  font-size: 1.6rem !important;
+  font-weight: 500;
+  color: $accent-dark;
+}
+
+p {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  color: $charcoal;
+  margin-bottom: 1.2rem;
+}
+
+// === LINKS ===
+a {
+  color: $accent-dark !important;
+  text-decoration: none;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+
+  &:hover {
+    color: $accent-brown !important;
+  }
+}
+
+// === NAVBAR ===
+.navbar {
+  border-bottom: 1px solid $soft-beige !important;
+  padding: 1.2rem 0 !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background-color: $off-white !important;
+}
+
+.navbar-logo {
+  max-height: 55px !important;
+  height: 55px !important;
+  filter: brightness(0) invert(0.15);
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.navbar-brand {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.5rem !important;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.navbar-nav .nav-link {
+  font-size: 0.8rem !important;
+  letter-spacing: 0.18em;
+  padding: 0.5rem 1rem !important;
+  color: $mid-gray !important;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $dark-text !important;
+  }
+}
+
+// === ABOUT TEMPLATE ===
+.about-link {
+  border: 1px solid $charcoal !important;
+  border-radius: 0 !important;
+  color: $charcoal !important;
+  background: transparent !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  padding: 0.7rem 2rem !important;
+  transition: all 0.4s ease;
+
+  &:hover {
+    background: $dark-text !important;
+    color: $off-white !important;
+    border-color: $dark-text !important;
+  }
+}
+
+
+.about-entity .about-contents h2.title,
+#title-block-header .title {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 4.5rem !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $dark-text;
+  line-height: 1.05;
+  margin-bottom: 0.5rem;
+  border-bottom: none !important;
+  padding-bottom: 0;
+}
+
+// Photo styling 
+.about-image {
+  border: 0px solid $soft-beige !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden;
+
+  img {
+    border-radius: 0 !important;
+    object-fit: cover;
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    display: block;
+    filter: grayscale(10%);
+    transition: filter 0.6s ease, transform 0.6s ease;
+
+    &:hover {
+      filter: grayscale(0%);
+      transform: scale(1.02);
+    }
+  }
+}
+
+// Text area next to photo
+.about-contents {
+  padding-left: 2.5rem;
+
+  p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.7;
+    color: $mid-gray;
+  }
+}
+
+// Divider between title and content
+.about-entity {
+  border-top: 0px solid $charcoal;
+  padding-top: 2.5rem;
+  margin-top: 1rem;
+}
+
+// Social link buttons — editorial rectangular
+.about-link {
+  border: 1px solid $charcoal !important;
+  border-radius: 0 !important;
+  color: $charcoal !important;
+  background: transparent !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  padding: 0.65rem 1.8rem !important;
+  transition: all 0.4s ease;
+
+  &:hover {
+    background: $dark-text !important;
+    color: $off-white !important;
+    border-color: $dark-text !important;
+  }
+}
+
+// Links row spacing
+.about-links {
+  margin-top: 2rem;
+  gap: 0.6rem;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .about-entity .about-contents h2.title,
+  #title-block-header .title {
+    font-size: 2.8rem !important;
+    letter-spacing: 0.06em;
+  }
+
+  .about-contents {
+    padding-left: 0;
+    padding-top: 1.5rem;
+  }
+
+  .about-contents p {
+    font-size: 1.2rem;
+  }
+}
+
+// === QUARTO TITLE ===
+.quarto-title h1 {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-weight: 300;
+  font-size: 3.5rem !important;
+  letter-spacing: 0.05em;
+}
+
+.quarto-title .description {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 1.05rem;
+  color: $mid-gray;
+  letter-spacing: 0.02em;
+}
+
+// === FOOTER ===
+.nav-footer {
+  border-top: none !important;
+  background-color: $dark-text !important;
+  color: $light-gray !important;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2.5rem 0 !important;
+
+  a {
+    color: $warm-cream !important;
+
+    &:hover {
+      color: $accent-brown !important;
+    }
+  }
+
+  // visibility
+  p, span, div {
+    color: $light-gray !important;
+  }
+}
+
+// === CARDS / LISTINGS ===
+.card {
+  background-color: $off-white !important;
+  border: 1px solid $soft-beige !important;
+  border-radius: 0 !important;
+  transition: all 0.4s ease;
+  overflow: hidden;
+
+  &:hover {
+    border-color: $accent-brown !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.card-title {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-weight: 500;
+  font-size: 1.4rem !important;
+  color: $dark-text !important;
+  letter-spacing: 0.02em;
+}
+
+.card-text {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: $mid-gray;
+}
+
+.listing-category {
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 0.7rem !important;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $accent-brown !important;
+  border: 1px solid $soft-beige !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 0.2rem 0.6rem !important;
+}
+
+// === CODE BLOCKS ===
+pre {
+  border: 1px solid $soft-beige !important;
+  border-radius: 0 !important;
+  background-color: $warm-cream !important;
+  font-size: 0.88rem;
+}
+
+code {
+  font-size: 0.88rem;
+}
+
+// === CALLOUT BLOCKS ===
+.callout {
+  border-radius: 0 !important;
+  border-left-width: 3px !important;
+  font-family: 'Outfit', sans-serif;
+}
+
+// === BLOCKQUOTES ===
+blockquote {
+  border-left: 2px solid $accent-brown !important;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 400;
+  color: $mid-gray;
+}
+
+// === HORIZONTAL RULES ===
+hr {
+  border: none;
+  border-top: 1px solid $soft-beige;
+  margin: 3rem 0;
+}
+
+// === IMAGES ===
+img {
+  transition: filter 0.4s ease;
+}
+
+figure {
+  margin: 2rem 0;
+}
+
+figcaption {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $light-gray;
+  margin-top: 0.8rem;
+  text-align: center;
+}
+
+// === SELECTION ===
+::selection {
+  background: $accent-brown;
+  color: $off-white;
+}
+
+// === TABLE OF CONTENTS ===
+#TOC {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+
+  a {
+    color: $mid-gray !important;
+
+    &:hover {
+      color: $dark-text !important;
+    }
+  }
+
+  .active {
+    color: $dark-text !important;
+    border-left: 2px solid $accent-brown !important;
+  }
+}
+
+// === TABLES ===
+table {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+
+  th {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    border-bottom: 2px solid $charcoal !important;
+  }
+
+  td {
+    border-bottom: 1px solid $soft-beige !important;
+  }
+}
+
+// === BUTTONS ===
+.btn {
+  border-radius: 0 !important;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.7rem 2rem;
+  transition: all 0.4s ease;
+}
+
+.btn-primary {
+  background-color: $dark-text !important;
+  border-color: $dark-text !important;
+  color: $off-white !important;
+
+  &:hover {
+    background-color: $accent-brown !important;
+    border-color: $accent-brown !important;
+  }
+}
+
+// === SCROLLBAR ===
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: $off-white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $light-gray;
+
+  &:hover {
+    background: $accent-brown;
+  }
+}
+
+// === CATEGORY BADGES ===
+.quarto-category {
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 0.7rem !important;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 0 !important;
+}

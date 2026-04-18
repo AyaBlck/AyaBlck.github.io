@@ -1,0 +1,227 @@
+/*-- scss:defaults --*/
+
+// Dark palette
+$dark-bg: #1A1A1A;
+$dark-surface: #242424;
+$dark-border: #333333;
+$dark-text: #E8E4E0;
+$dark-muted: #A0A0A0;
+$dark-accent: #C4A882;
+$dark-link: #D4B896;
+$dark-hover: #E8D5BE;
+
+// Base document colors
+$body-bg: $dark-bg;
+$body-color: $dark-text;
+$navbar-bg: $dark-bg;
+$navbar-fg: $dark-text;
+$navbar-hl: $dark-accent;
+$footer-bg: #111111;
+$link-color: $dark-link;
+
+// Code
+$code-bg: $dark-surface;
+$code-color: $dark-accent;
+
+/*-- scss:rules --*/
+
+body {
+  background-color: $dark-bg !important;
+  color: $dark-text !important;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  color: $dark-text !important;
+}
+
+h2 {
+  border-bottom: 1px solid $dark-border;
+}
+
+h3 {
+  color: $dark-accent !important;
+}
+
+p {
+  color: $dark-muted !important;
+}
+
+// Links
+a {
+  color: $dark-link !important;
+
+  &:hover {
+    color: $dark-hover !important;
+  }
+}
+
+// Navbar
+.navbar {
+  background-color: $dark-bg !important;
+  border-bottom: 1px solid $dark-border !important;
+}
+
+.navbar-logo {
+  filter: brightness(0) invert(0.85) !important;
+}
+
+.navbar-brand {
+  color: $dark-text !important;
+}
+
+.navbar-nav .nav-link {
+  color: $dark-muted !important;
+
+  &:hover {
+    color: $dark-text !important;
+  }
+}
+
+// About template
+.about-link {
+  border: 1px solid $dark-muted !important;
+  color: $dark-text !important;
+  background: transparent !important;
+
+  &:hover {
+    background: $dark-text !important;
+    color: $dark-bg !important;
+    border-color: $dark-text !important;
+  }
+}
+
+.about-image {
+  border: 1px solid $dark-border !important;
+}
+
+.about-contents p {
+  color: $dark-muted !important;
+}
+
+// Footer
+.nav-footer {
+  background-color: #111111 !important;
+  border-top: none !important;
+  color: $dark-muted !important;
+
+  a {
+    color: $dark-accent !important;
+
+    &:hover {
+      color: $dark-hover !important;
+    }
+  }
+
+  p, span, div {
+    color: $dark-muted !important;
+  }
+}
+
+// Cards
+.card {
+  background-color: $dark-surface !important;
+  border: 1px solid $dark-border !important;
+
+  &:hover {
+    border-color: $dark-accent !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.card-title {
+  color: $dark-text !important;
+}
+
+.card-text {
+  color: $dark-muted !important;
+}
+
+.listing-category {
+  color: $dark-accent !important;
+  border: 1px solid $dark-border !important;
+  background: transparent !important;
+}
+
+// Code blocks
+pre {
+  background-color: $dark-surface !important;
+  border: 1px solid $dark-border !important;
+}
+
+code {
+  color: $dark-accent;
+}
+
+// Callouts
+.callout {
+  background-color: $dark-surface !important;
+  border-color: $dark-border !important;
+  color: $dark-text !important;
+}
+
+// Blockquotes
+blockquote {
+  border-left: 2px solid $dark-accent !important;
+  color: $dark-muted;
+}
+
+// Tables
+table {
+  th {
+    border-bottom: 2px solid $dark-muted !important;
+    color: $dark-text;
+  }
+
+  td {
+    border-bottom: 1px solid $dark-border !important;
+    color: $dark-muted;
+  }
+}
+
+// TOC
+#TOC {
+  a {
+    color: $dark-muted !important;
+
+    &:hover {
+      color: $dark-text !important;
+    }
+  }
+
+  .active {
+    color: $dark-text !important;
+    border-left: 2px solid $dark-accent !important;
+  }
+}
+
+// Selection
+::selection {
+  background: $dark-accent;
+  color: $dark-bg;
+}
+
+// Scrollbar
+::-webkit-scrollbar-track {
+  background: $dark-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $dark-border;
+
+  &:hover {
+    background: $dark-accent;
+  }
+}
+
+// Buttons
+.btn-primary {
+  background-color: $dark-accent !important;
+  border-color: $dark-accent !important;
+  color: $dark-bg !important;
+
+  &:hover {
+    background-color: $dark-hover !important;
+    border-color: $dark-hover !important;
+  }
+}

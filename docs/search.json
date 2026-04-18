@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Hi, I’m Alina Bolshakova. I am a finance professional with 11 years of experience spanning financial planning, budgeting, and performance analysis. Currently a Team Lead and Finance Business Partner, combining strategic decision-making and team management with hands-on analytical work — building financial models, writing SQL to extract insights, and translating numbers into actionable business strategies."
+  },
+  {
+    "objectID": "about.html#background",
+    "href": "about.html#background",
+    "title": "About",
+    "section": "",
+    "text": "Hi, I’m Alina Bolshakova. I am a finance professional with 11 years of experience spanning financial planning, budgeting, and performance analysis. Currently a Team Lead and Finance Business Partner, combining strategic decision-making and team management with hands-on analytical work — building financial models, writing SQL to extract insights, and translating numbers into actionable business strategies."
+  },
+  {
+    "objectID": "about.html#data-analysis",
+    "href": "about.html#data-analysis",
+    "title": "About",
+    "section": "Data Analysis",
+    "text": "Data Analysis\nAfter over a decade in finance, I recognised that the most impactful decisions are driven by data. This led me to explore data science — learning Python, building visualisations, and applying analytical techniques to real-world problems. I’m currently deepening these skills to bridge the gap between traditional finance and modern data-driven approaches."
+  },
+  {
+    "objectID": "about.html#skills",
+    "href": "about.html#skills",
+    "title": "About",
+    "section": "Skills",
+    "text": "Skills\n\n\n Financial Planning & Analysis\n SQL\n Python\n\n Data Visualisation\n Team Leadership\n Advanced Excel & Financial Modelling"
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About",
+    "section": "Education",
+    "text": "Education\n\n\n\n\n\n\nMSc in Business Analytics — Dublin City University\nBachelor’s and Master’s in Economics and Management — Voronezh State University"
+  },
+  {
+    "objectID": "about.html#beyond-work",
+    "href": "about.html#beyond-work",
+    "title": "About",
+    "section": "Beyond Work",
+    "text": "Beyond Work\nWhen I’m not crunching numbers, you’ll find me exploring Dublin, reading about behavioural economics, or experimenting with data visualisation techniques to tell compelling stories with data.\n\nFeel free to connect with me on LinkedIn or check out my work on GitHub."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Alina Bolshakova",
+    "section": "",
+    "text": "Welcome to my portfolio! Here you will find my projects, research, and insights at the intersection of finance and data science.\nLearn more about me →"
+  }
+]

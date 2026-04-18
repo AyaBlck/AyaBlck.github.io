@@ -1,0 +1,38 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Alina Bolshakova"
+  favicon: images/favicon-32x32.png
+  navbar:
+    logo: images/logo.png
+    right: # accepts right/left/center; you can also place items individually on the left, right, and center
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - href: projects/index.qmd
+        text: Projects
+      - href: reflection.qmd
+        text: Reflection
+      - href: contact.qmd
+        text: Contact
+      - href: cv/myCV.pdf # provide a relative file path to a pdf will open up a browser-based pdf viewer when clicked
+        text: CV
+        target: _blank # opens link (or page) in a new browser tab
+      - icon: github # add icons as navbar buttons
+        href: https://github.com/AyaBlck
+        target: _blank
+  page-footer:
+    background: light #or dark
+    left: Copyright 2026, Alina Bolshakova
+    right: This website is built with [GitHub](https://github.com/AyaBlck/AyaBlck.github.io){target=_blank} and [Quarto](https://quarto.org/){target=_blank}
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles.scss]
+      dark: [darkly, styles-dark.scss]
+    toc: true
+
+
