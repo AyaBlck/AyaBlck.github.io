@@ -185,6 +185,6 @@ The bank should focus on developing premium products for customers with higher i
 ::: {.column width="50%"}
 :::
 ::: {.column width="50%" style="text-align: right;"}
-[Next: Financial Data Analysis →](../project_2/index.qmd)
+[Next: BERT vs LLaMA 3: Fake News Detection →](../project_2/index.qmd)
 :::
 ::::

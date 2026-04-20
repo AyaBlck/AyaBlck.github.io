@@ -1,20 +1,135 @@
 ---
-title: "lala"
-description: "lalalal"
+title: "Fraud Detection Using Statistics and Machine Learning"
+description: "Analysing customer transaction data to identify fraud patterns and build predictive models"
 author: "Alina Bolshakova"
-date: 2026-04-10
-image: cover3.jpg
-categories: [Python, Finance, Data Visualisation]
+date: 2026-04-15
+image: /images/project_3.png
+categories: [Python, Machine Learning, Data Visualisation, Finance]
+code-fold: true
+code-tools: true
 ---
 
-Project content goes here...
+## Overview
+
+Financial fraud is a growing concern for institutions worldwide. This project analyses 500 customer transaction records to identify fraud patterns and build predictive models. The dataset reveals that 49% of transactions are fraudulent, amounting to €355K in losses — 35.5% of total transaction volume.
+
+## The Critical Threshold
+
+One of the most striking findings was the relationship between transaction size and fraud probability.
+
+```{python}
+#| error: true
+#| fig-cap: "Fraud rate increases sharply above €6,000"
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+warnings.filterwarnings('ignore')
+sns.set_style('whitegrid')
+
+df = pd.read_excel("fraud_victim_dataset.xlsx")
+df_new = pd.get_dummies(df,
+                    columns=['gender', 'education', 'marital_status',
+                             'region', 'transaction_type', 'device_type'],
+                    drop_first=True)
+
+df_new['amount_bin'] = (df_new['transaction_amount'] // 1000) * 1000
+fraud_rate = df_new.groupby('amount_bin')['is_fraud'].mean() * 100
+
+plt.figure(figsize=(8, 4))
+ax = sns.barplot(x=fraud_rate.index.astype(int), y=fraud_rate.values, palette='flare')
+ax.set_xticklabels([f"{int(x/1000)}K" for x in fraud_rate.index])
+for container in ax.containers:
+    ax.bar_label(container, fmt='%.0f%%')
+plt.title('Fraud Rate per Transaction Amount Bin', fontsize=14)
+plt.xlabel('Transaction Amount (EUR)')
+plt.ylabel('Fraud Rate (%)')
+plt.tight_layout()
+plt.show()
+```
+
+::: {.callout-important}
+## Critical Finding
+Fraud rates rise sharply from €8K, reaching 80–100% for transactions above €9K. Transactions above €6K show a clear linear relationship between transaction size and fraud loss.
+:::
+
+## Transaction vs Fraud Amount
+
+```{python}
+#| error: true
+#| fig-cap: "Clear separation between fraud and non-fraud transactions"
+
+plt.figure(figsize=(8, 4))
+sns.scatterplot(data=df, x='transaction_amount', y='fraud_amount',
+                hue='is_fraud', palette='Set2', alpha=0.7)
+plt.title('Transaction Amount vs Fraud Amount', fontsize=14)
+plt.xlabel('Transaction Amount (EUR)')
+plt.ylabel('Fraud Amount (EUR)')
+plt.tight_layout()
+plt.show()
+```
+
+## Model Comparison
+
+Four classification models were tested. **Random Forest** achieved the best overall performance.
+## Model Comparison
+
+Four classification models were tested for fraud detection:
+
+| Metric | Logistic Regression | Random Forest | Gradient Boosting | XGBoost |
+|--------|:------------------:|:-------------:|:-----------------:|:-------:|
+| Accuracy | 0.60 | **0.66** | 0.62 | 0.58 |
+| Precision | 0.58 | **0.64** | 0.59 | 0.56 |
+| Recall | 0.69 | 0.70 | 0.69 | **0.72** |
+| F1-score | 0.63 | **0.67** | 0.64 | 0.63 |
+| ROC-AUC | 0.66 | **0.70** | 0.63 | 0.62 |
+
+**Random Forest** achieved the best overall performance with ROC-AUC of 0.704, confirming that fraud patterns in this dataset are non-linear. XGBoost showed the highest recall (72%) but lacked precision, leading to more false positives.
+
+## Key Findings
+
+::: {.callout-tip}
+## Main Insights
+- **Transaction amount** is the strongest fraud predictor — rates exceed 80% above €8K
+- **Age** matters — fraud cases grow significantly after age 60
+- **Lower-income** customers face higher fraud rates
+- **Desktop and mobile** channels show higher fraud rates than other devices
+- **Random Forest** outperformed all models with ROC-AUC of 0.704
+:::
+
+## Methodology
+
+```{mermaid}
+flowchart TD
+    A[Customer Dataset<br>500 records, 23 features] --> B[Data Cleaning<br>Outlier detection via IQR & Z-score]
+    B --> C[EDA<br>Distribution & correlation analysis]
+    C --> D[Classification<br>4 models compared]
+    C --> E[Regression<br>Fraud amount prediction]
+    D --> F[Recommendations]
+    E --> F
+```
+
+::: {.callout-warning}
+## Business Recommendations
+1. **Additional verification** for transactions above €6K
+2. **Targeted protection** for low-income and elderly customers
+3. **Enhanced security** on desktop and mobile channels
+4. **Deploy Random Forest** as the primary fraud detection engine
+:::
+
+---
+
+*This project was completed as part of the MSc in Business Analytics programme at Dublin City University.*
 
 ---
 
 :::: {.columns}
 ::: {.column width="50%"}
-[← Previous: Financial Data Analysis](../project_2/index.qmd)
+[← Previous: BERT vs LLaMA 3: Fake News Detection](../project_2/index.qmd)
 :::
 ::: {.column width="50%" style="text-align: right;"}
 :::
 ::::
+

@@ -88,7 +88,7 @@
     "href": "projects/list/project_1/index.html#results",
     "title": "Churn Analysis for Bank Customers",
     "section": "Results",
-    "text": "Results\nThe analysis revealed several actionable patterns for the bank’s marketing department.\nThe bank successfully attracts credit and salary-transfer customers, but struggles to retain clients with other products. Customers with 3-4 products are almost entirely churned, suggesting that beyond credit services, the bank’s product offerings may not meet customer expectations.\n\nThe data suggests a critical gap: the bank lacks a compelling product for higher-income customers — the “upper middle class” segment earning above the regional average salary.\n\nThe relationship between recent activity and churn is particularly interesting. Customers who were recently active are more likely to leave, which makes sense — before closing an account, customers typically transfer their funds to other banks. This activity spike could serve as an early warning signal for the retention team.\n\n\n\n\n\n\nWarningRecommendation\n\n\n\nThe bank should focus on developing premium products for customers with higher incomes (above 45,000) and consider personalised retention strategies for customers aged 30-45, who represent the highest churn risk segment.\n\n\n\n\n\n\n\nNext: Financial Data Analysis →"
+    "text": "Results\nThe analysis revealed several actionable patterns for the bank’s marketing department.\nThe bank successfully attracts credit and salary-transfer customers, but struggles to retain clients with other products. Customers with 3-4 products are almost entirely churned, suggesting that beyond credit services, the bank’s product offerings may not meet customer expectations.\n\nThe data suggests a critical gap: the bank lacks a compelling product for higher-income customers — the “upper middle class” segment earning above the regional average salary.\n\nThe relationship between recent activity and churn is particularly interesting. Customers who were recently active are more likely to leave, which makes sense — before closing an account, customers typically transfer their funds to other banks. This activity spike could serve as an early warning signal for the retention team.\n\n\n\n\n\n\nWarningRecommendation\n\n\n\nThe bank should focus on developing premium products for customers with higher incomes (above 45,000) and consider personalised retention strategies for customers aged 30-45, who represent the highest churn risk segment.\n\n\n\n\n\n\n\nNext: BERT vs LLaMA 3: Fake News Detection →"
   },
   {
     "objectID": "projects/list/project_2/index.html",
@@ -96,6 +96,69 @@
     "title": "BERT vs LLaMA 3: Fake News Detection",
     "section": "",
     "text": "Disinformation has become a defining challenge of the digital age. This project compares two fundamentally different AI approaches to fake news detection: BERT (a discriminative model, fine-tuned on labelled data) and LLaMA 3 (a generative model, using few-shot prompting via Ollama). The goal was to determine which approach is more suitable for deployment in a news organisation’s editorial pipeline.\n View BERT notebook on GitHub  View LLaMA 3 notebook on GitHub"
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#overview",
+    "href": "projects/list/project_2/index.html#overview",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "",
+    "text": "Disinformation has become a defining challenge of the digital age. This project compares two fundamentally different AI approaches to fake news detection: BERT (a discriminative model, fine-tuned on labelled data) and LLaMA 3 (a generative model, using few-shot prompting via Ollama). The goal was to determine which approach is more suitable for deployment in a news organisation’s editorial pipeline.\n View BERT notebook on GitHub  View LLaMA 3 notebook on GitHub"
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#dataset",
+    "href": "projects/list/project_2/index.html#dataset",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "Dataset",
+    "text": "Dataset\nThe ISOT Fake and Real News Dataset contains 44,919 labelled news articles collected from Reuters (real) and Politifact-flagged sources (fake).\n\n\n\n\n\n\n\n\nFeature\nReal News\nFake News\n\n\n\n\nArticles\n21,417\n23,502\n\n\nSource\nReuters.com\nPolitifact/Wikipedia-flagged\n\n\nTopics\npoliticsNews, worldnews\npolitics, Government News, US_News\n\n\nDate range\n2016–2018\n2015–2018"
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#data-preparation",
+    "href": "projects/list/project_2/index.html#data-preparation",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "Data Preparation",
+    "text": "Data Preparation\n\n\nCode\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay\nimport warnings\nwarnings.filterwarnings('ignore')\n\n# Simulating the dataset summary (original data loaded from CSVs in full notebook)\ndata = {\n    'Category': ['Real', 'Fake'],\n    'Count': [21417, 23502],\n    'Avg Words': [405, 688]\n}\nsummary_df = pd.DataFrame(data)\n\nfig, axes = plt.subplots(1, 2, figsize=(8, 4))\n\naxes[0].bar(summary_df['Category'], summary_df['Count'],\n            color=['steelblue', 'tomato'], edgecolor='white')\naxes[0].set_title('Class Distribution (Full Dataset)')\naxes[0].set_ylabel('Number of Articles')\nfor i, v in enumerate(summary_df['Count']):\n    axes[0].text(i, v + 300, f'{v:,}', ha='center')\n\naxes[1].bar(summary_df['Category'], summary_df['Avg Words'],\n            color=['steelblue', 'tomato'], edgecolor='white')\naxes[1].set_title('Average Word Count per Article')\naxes[1].set_ylabel('Words')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nClass distribution and word count analysis\n\n\n\n\nA balanced subsample of 4,000 articles (2,000 real + 2,000 fake) was used for BERT fine-tuning, split 80/20 into training and test sets. For LLaMA 3, a separate balanced sample of 50 articles was drawn from the held-out test set due to computational constraints of running the model locally on CPU."
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#bert-fine-tuning-approach",
+    "href": "projects/list/project_2/index.html#bert-fine-tuning-approach",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "BERT Fine-Tuning Approach",
+    "text": "BERT Fine-Tuning Approach\nThe pre-trained bert-base-uncased model was fine-tuned using the HuggingFace Transformers library with the following configuration:\n\n\n\nHyperparameter\nValue\n\n\n\n\nLearning rate\n2e-5\n\n\nBatch size (train/eval)\n16 / 32\n\n\nEpochs\n3\n\n\nMax sequence length\n256 tokens\n\n\nWarmup steps\n200\n\n\nMetric for best model\nF1 (macro)\n\n\n\n\n\nCode\n# Simulated training curves based on actual results\nsteps = list(range(0, 600, 50))\ntrain_loss = [0.65, 0.25, 0.08, 0.03, 0.015, 0.01, 0.008, 0.005, 0.004, 0.003, 0.002, 0.002]\nepochs = [1, 2, 3]\nval_loss = [0.029, 0.017, 0.019]\n\nfig, axes = plt.subplots(1, 2, figsize=(8, 4))\naxes[0].plot(steps, train_loss, color='steelblue', linewidth=2)\naxes[0].set_title('Training Loss')\naxes[0].set_xlabel('Steps')\naxes[0].set_ylabel('Loss')\n\naxes[1].plot(epochs, val_loss, marker='o', color='tomato', linewidth=2)\naxes[1].set_title('Validation Loss per Epoch')\naxes[1].set_xlabel('Epoch')\naxes[1].set_ylabel('Loss')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nBERT training and validation loss curves"
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#llama-3-few-shot-approach",
+    "href": "projects/list/project_2/index.html#llama-3-few-shot-approach",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "LLaMA 3 Few-Shot Approach",
+    "text": "LLaMA 3 Few-Shot Approach\nLLaMA 3 was run locally using Ollama — an open-source runtime for large language models. No model weights were updated; instead, a few-shot prompt with three labelled examples was used to guide classification.\n\n\nCode\n# Few-shot prompt template used for LLaMA 3\nprompt_template = \"\"\"\nYou are an expert fact-checker. Classify each news article as REAL or FAKE.\nOnly reply with one word: REAL or FAKE.\n\nExamples:\nArticle: \"WASHINGTON (Reuters) - The U.S. Senate confirmed Rex Tillerson \nas secretary of state by a vote of 56-43.\"\nLabel: REAL\n\nArticle: \"BREAKING: Anonymous sources confirm the deep state is planning \nto overthrow the president using secret FEMA camps.\"\nLabel: FAKE\n\nArticle: \"Scientists ADMIT vaccines cause autism. The mainstream media \nis hiding the TRUTH from you!\"\nLabel: FAKE\n\nNow classify this article:\nArticle: \"{text}\"\nLabel:\n\"\"\"\nprint(prompt_template)\n\n\n\nYou are an expert fact-checker. Classify each news article as REAL or FAKE.\nOnly reply with one word: REAL or FAKE.\n\nExamples:\nArticle: \"WASHINGTON (Reuters) - The U.S. Senate confirmed Rex Tillerson \nas secretary of state by a vote of 56-43.\"\nLabel: REAL\n\nArticle: \"BREAKING: Anonymous sources confirm the deep state is planning \nto overthrow the president using secret FEMA camps.\"\nLabel: FAKE\n\nArticle: \"Scientists ADMIT vaccines cause autism. The mainstream media \nis hiding the TRUTH from you!\"\nLabel: FAKE\n\nNow classify this article:\nArticle: \"{text}\"\nLabel:"
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#results-comparison",
+    "href": "projects/list/project_2/index.html#results-comparison",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "Results Comparison",
+    "text": "Results Comparison\n\n\nCode\nimport plotly.graph_objects as go\n\nmetrics = ['Accuracy', 'Macro Precision', 'Macro Recall', 'Macro F1']\nbert_scores = [99.75, 99.75, 99.75, 99.75]\nllama_scores = [54.00, 76.04, 54.00, 41.65]\n\nfig = go.Figure()\nfig.add_trace(go.Bar(name='BERT (Fine-tuned)', x=metrics, y=bert_scores,\n                     marker_color='steelblue'))\nfig.add_trace(go.Bar(name='LLaMA 3 (Few-shot)', x=metrics, y=llama_scores,\n                     marker_color='tomato'))\n\nfig.update_layout(\n    title='Model Performance Comparison (%)',\n    yaxis_title='Score (%)',\n    barmode='group',\n    plot_bgcolor='rgba(0,0,0,0)',\n    paper_bgcolor='rgba(0,0,0,0)',\n    yaxis=dict(range=[0, 105])\n)\nfig.show()\n\n\n                                                \nHead-to-head performance comparison: BERT vs LLaMA 3\n\n\n\n\nCode\nfig, axes = plt.subplots(1, 2, figsize=(8, 4))\n\n# BERT confusion matrix\nbert_cm = np.array([[400, 0], [2, 398]])\ndisp1 = ConfusionMatrixDisplay(confusion_matrix=bert_cm, display_labels=['Fake', 'Real'])\ndisp1.plot(ax=axes[0], colorbar=False, cmap='Blues')\naxes[0].set_title('BERT (800 articles)')\n\n# LLaMA confusion matrix\nllama_cm = np.array([[2, 23], [0, 25]])\ndisp2 = ConfusionMatrixDisplay(confusion_matrix=llama_cm, display_labels=['Fake', 'Real'])\ndisp2.plot(ax=axes[1], colorbar=False, cmap='Oranges')\naxes[1].set_title('LLaMA 3 (50 articles)')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nConfusion matrices for both models"
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#key-findings",
+    "href": "projects/list/project_2/index.html#key-findings",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "Key Findings",
+    "text": "Key Findings\n\n\n\n\n\n\nTipMain Insights\n\n\n\n\nBERT achieved 99.75% accuracy with perfect recall on fake articles — only 2 out of 800 articles were misclassified\nLLaMA 3 achieved just 54% accuracy (barely above random chance) with a strong bias towards predicting “Real” — 23 out of 25 fake articles were missed\nThe performance gap is not a failure of LLaMA 3 as a model, but a limitation of few-shot prompting versus gradient-based fine-tuning for structured classification tasks\n\n\n\n\n\n\n\n\n\nWarningBusiness Recommendation\n\n\n\nFor deployment in a news organisation’s editorial pipeline, BERT is the clear choice — its 99.75% accuracy translates to roughly 25 misclassifications per 10,000 articles. However, a hybrid architecture combining BERT’s classification reliability with LLaMA 3’s generative explainability could offer the best of both worlds: BERT flags articles, LLaMA 3 explains why."
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#ethical-considerations",
+    "href": "projects/list/project_2/index.html#ethical-considerations",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "Ethical Considerations",
+    "text": "Ethical Considerations\nThis project evaluated both models against the EU AI Act (2024) and Trustworthy AI principles. Key considerations include maintaining human oversight in editorial decisions, addressing dataset bias (the ISOT dataset reflects Western media perspectives), and ensuring transparency in model decision-making. LLaMA 3’s local deployment via Ollama offers a privacy advantage, as no article text leaves the organisation’s infrastructure."
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#methodology",
+    "href": "projects/list/project_2/index.html#methodology",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "Methodology",
+    "text": "Methodology\n\n\n\n\n\nflowchart LR\n    A[ISOT Dataset&lt;br&gt;44,919 articles] --&gt; B[Preprocessing&lt;br&gt;Label assignment&lt;br&gt;Feature construction]\n    B --&gt; C[BERT Pipeline&lt;br&gt;4,000 articles&lt;br&gt;Fine-tuning]\n    B --&gt; D[LLaMA 3 Pipeline&lt;br&gt;50 articles&lt;br&gt;Few-shot prompting]\n    C --&gt; E[Evaluation&lt;br&gt;Accuracy, F1&lt;br&gt;Confusion Matrix]\n    D --&gt; E\n    E --&gt; F[Comparative&lt;br&gt;Analysis]\n\n\n\n\n\n\n\nThis project was completed as part of the MSc in Business Analytics, Advanced Analytics Techniques module at Dublin City University.\n\n\n\n← Previous: Bank Churn Analysis\n\nNext: Project 3 →"
   },
   {
     "objectID": "reflection.html",
@@ -172,14 +235,56 @@
     "href": "projects/index.html",
     "title": "Projects",
     "section": "",
-    "text": "Churn Analysis for Bank Customers\n\n\n\nPython\n\nStatistics\n\nData Visualisation\n\n\n\nUsing Python to analyse customer churn in the banking sector, leveraging statistical methods and data visualisation.\n\n\n\nApr 18, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nBERT vs LLaMA 3: Fake News Detection\n\n\n\nPython\n\nNLP\n\nMachine Learning\n\nDeep Learning\n\n\n\nA comparative study of discriminative and generative AI models for detecting fake news, using fine-tuned BERT and few-shot LLaMA 3.\n\n\n\nApr 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nlala\n\n\n\nPython\n\nFinance\n\nData Visualisation\n\n\n\nlalalal\n\n\n\nApr 10, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "Churn Analysis for Bank Customers\n\n\n\nPython\n\nStatistics\n\nData Visualisation\n\n\n\nUsing Python to analyse customer churn in the banking sector, leveraging statistical methods and data visualisation.\n\n\n\nApr 18, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nBERT vs LLaMA 3: Fake News Detection\n\n\n\nPython\n\nNLP\n\nMachine Learning\n\nDeep Learning\n\n\n\nA comparative study of discriminative and generative AI models for detecting fake news, using fine-tuned BERT and few-shot LLaMA 3.\n\n\n\nApr 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nFraud Detection Using Statistics and Machine Learning\n\n\n\nPython\n\nMachine Learning\n\nData Visualisation\n\nFinance\n\n\n\nAnalysing customer transaction data to identify fraud patterns and build predictive models\n\n\n\nApr 15, 2026\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/list/project_3/index.html",
     "href": "projects/list/project_3/index.html",
-    "title": "lala",
+    "title": "Fraud Detection Using Statistics and Machine Learning",
     "section": "",
-    "text": "Project content goes here…\n\n\n\n← Previous: Financial Data Analysis"
+    "text": "Financial fraud is a growing concern for institutions worldwide. This project analyses 500 customer transaction records to identify fraud patterns and build predictive models. The dataset reveals that 49% of transactions are fraudulent, amounting to €355K in losses — 35.5% of total transaction volume."
+  },
+  {
+    "objectID": "projects/list/project_3/index.html#overview",
+    "href": "projects/list/project_3/index.html#overview",
+    "title": "Fraud Detection Using Statistics and Machine Learning",
+    "section": "",
+    "text": "Financial fraud is a growing concern for institutions worldwide. This project analyses 500 customer transaction records to identify fraud patterns and build predictive models. The dataset reveals that 49% of transactions are fraudulent, amounting to €355K in losses — 35.5% of total transaction volume."
+  },
+  {
+    "objectID": "projects/list/project_3/index.html#the-critical-threshold",
+    "href": "projects/list/project_3/index.html#the-critical-threshold",
+    "title": "Fraud Detection Using Statistics and Machine Learning",
+    "section": "The Critical Threshold",
+    "text": "The Critical Threshold\nOne of the most striking findings was the relationship between transaction size and fraud probability.\n\n\nCode\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\nsns.set_style('whitegrid')\n\ndf = pd.read_excel(\"fraud_victim_dataset.xlsx\")\ndf_new = pd.get_dummies(df,\n                    columns=['gender', 'education', 'marital_status',\n                             'region', 'transaction_type', 'device_type'],\n                    drop_first=True)\n\ndf_new['amount_bin'] = (df_new['transaction_amount'] // 1000) * 1000\nfraud_rate = df_new.groupby('amount_bin')['is_fraud'].mean() * 100\n\nplt.figure(figsize=(8, 4))\nax = sns.barplot(x=fraud_rate.index.astype(int), y=fraud_rate.values, palette='flare')\nax.set_xticklabels([f\"{int(x/1000)}K\" for x in fraud_rate.index])\nfor container in ax.containers:\n    ax.bar_label(container, fmt='%.0f%%')\nplt.title('Fraud Rate per Transaction Amount Bin', fontsize=14)\nplt.xlabel('Transaction Amount (EUR)')\nplt.ylabel('Fraud Rate (%)')\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nFraud rate increases sharply above €6,000\n\n\n\n\n\n\n\n\n\n\nImportantCritical Finding\n\n\n\nFraud rates rise sharply from €8K, reaching 80–100% for transactions above €9K. Transactions above €6K show a clear linear relationship between transaction size and fraud loss."
+  },
+  {
+    "objectID": "projects/list/project_3/index.html#transaction-vs-fraud-amount",
+    "href": "projects/list/project_3/index.html#transaction-vs-fraud-amount",
+    "title": "Fraud Detection Using Statistics and Machine Learning",
+    "section": "Transaction vs Fraud Amount",
+    "text": "Transaction vs Fraud Amount\n\n\nCode\nplt.figure(figsize=(8, 4))\nsns.scatterplot(data=df, x='transaction_amount', y='fraud_amount',\n                hue='is_fraud', palette='Set2', alpha=0.7)\nplt.title('Transaction Amount vs Fraud Amount', fontsize=14)\nplt.xlabel('Transaction Amount (EUR)')\nplt.ylabel('Fraud Amount (EUR)')\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nClear separation between fraud and non-fraud transactions"
+  },
+  {
+    "objectID": "projects/list/project_3/index.html#model-comparison",
+    "href": "projects/list/project_3/index.html#model-comparison",
+    "title": "Fraud Detection Using Statistics and Machine Learning",
+    "section": "Model Comparison",
+    "text": "Model Comparison\nFour classification models were tested. Random Forest achieved the best overall performance. ## Model Comparison\nFour classification models were tested for fraud detection:\n\n\n\n\n\n\n\n\n\n\nMetric\nLogistic Regression\nRandom Forest\nGradient Boosting\nXGBoost\n\n\n\n\nAccuracy\n0.60\n0.66\n0.62\n0.58\n\n\nPrecision\n0.58\n0.64\n0.59\n0.56\n\n\nRecall\n0.69\n0.70\n0.69\n0.72\n\n\nF1-score\n0.63\n0.67\n0.64\n0.63\n\n\nROC-AUC\n0.66\n0.70\n0.63\n0.62\n\n\n\nRandom Forest achieved the best overall performance with ROC-AUC of 0.704, confirming that fraud patterns in this dataset are non-linear. XGBoost showed the highest recall (72%) but lacked precision, leading to more false positives."
+  },
+  {
+    "objectID": "projects/list/project_3/index.html#key-findings",
+    "href": "projects/list/project_3/index.html#key-findings",
+    "title": "Fraud Detection Using Statistics and Machine Learning",
+    "section": "Key Findings",
+    "text": "Key Findings\n\n\n\n\n\n\nTipMain Insights\n\n\n\n\nTransaction amount is the strongest fraud predictor — rates exceed 80% above €8K\nAge matters — fraud cases grow significantly after age 60\nLower-income customers face higher fraud rates\nDesktop and mobile channels show higher fraud rates than other devices\nRandom Forest outperformed all models with ROC-AUC of 0.704"
+  },
+  {
+    "objectID": "projects/list/project_3/index.html#methodology",
+    "href": "projects/list/project_3/index.html#methodology",
+    "title": "Fraud Detection Using Statistics and Machine Learning",
+    "section": "Methodology",
+    "text": "Methodology\n\n\n\n\n\nflowchart TD\n    A[Customer Dataset&lt;br&gt;500 records, 23 features] --&gt; B[Data Cleaning&lt;br&gt;Outlier detection via IQR & Z-score]\n    B --&gt; C[EDA&lt;br&gt;Distribution & correlation analysis]\n    C --&gt; D[Classification&lt;br&gt;4 models compared]\n    C --&gt; E[Regression&lt;br&gt;Fraud amount prediction]\n    D --&gt; F[Recommendations]\n    E --&gt; F\n\n\n\n\n\n\n\n\n\n\n\n\nWarningBusiness Recommendations\n\n\n\n\nAdditional verification for transactions above €6K\nTargeted protection for low-income and elderly customers\nEnhanced security on desktop and mobile channels\nDeploy Random Forest as the primary fraud detection engine\n\n\n\n\nThis project was completed as part of the MSc in Business Analytics programme at Dublin City University.\n\n\n\n← Previous: BERT vs LLaMA 3: Fake News Detection"
   },
   {
     "objectID": "index.html",
@@ -187,68 +292,5 @@
     "title": "Alina Bolshakova",
     "section": "",
     "text": "Welcome to my portfolio! Here you will find my projects, research, and insights at the intersection of finance and data science.\nLearn more about me →"
-  },
-  {
-    "objectID": "projects/list/project_2/index.html#overview",
-    "href": "projects/list/project_2/index.html#overview",
-    "title": "BERT vs LLaMA 3: Fake News Detection",
-    "section": "",
-    "text": "Disinformation has become a defining challenge of the digital age. This project compares two fundamentally different AI approaches to fake news detection: BERT (a discriminative model, fine-tuned on labelled data) and LLaMA 3 (a generative model, using few-shot prompting via Ollama). The goal was to determine which approach is more suitable for deployment in a news organisation’s editorial pipeline.\n View BERT notebook on GitHub  View LLaMA 3 notebook on GitHub"
-  },
-  {
-    "objectID": "projects/list/project_2/index.html#dataset",
-    "href": "projects/list/project_2/index.html#dataset",
-    "title": "BERT vs LLaMA 3: Fake News Detection",
-    "section": "Dataset",
-    "text": "Dataset\nThe ISOT Fake and Real News Dataset contains 44,919 labelled news articles collected from Reuters (real) and Politifact-flagged sources (fake).\n\n\n\n\n\n\n\n\nFeature\nReal News\nFake News\n\n\n\n\nArticles\n21,417\n23,502\n\n\nSource\nReuters.com\nPolitifact/Wikipedia-flagged\n\n\nTopics\npoliticsNews, worldnews\npolitics, Government News, US_News\n\n\nDate range\n2016–2018\n2015–2018"
-  },
-  {
-    "objectID": "projects/list/project_2/index.html#data-preparation",
-    "href": "projects/list/project_2/index.html#data-preparation",
-    "title": "BERT vs LLaMA 3: Fake News Detection",
-    "section": "Data Preparation",
-    "text": "Data Preparation\n\n\nCode\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay\nimport warnings\nwarnings.filterwarnings('ignore')\n\n# Simulating the dataset summary (original data loaded from CSVs in full notebook)\ndata = {\n    'Category': ['Real', 'Fake'],\n    'Count': [21417, 23502],\n    'Avg Words': [405, 688]\n}\nsummary_df = pd.DataFrame(data)\n\nfig, axes = plt.subplots(1, 2, figsize=(8, 4))\n\naxes[0].bar(summary_df['Category'], summary_df['Count'],\n            color=['steelblue', 'tomato'], edgecolor='white')\naxes[0].set_title('Class Distribution (Full Dataset)')\naxes[0].set_ylabel('Number of Articles')\nfor i, v in enumerate(summary_df['Count']):\n    axes[0].text(i, v + 300, f'{v:,}', ha='center')\n\naxes[1].bar(summary_df['Category'], summary_df['Avg Words'],\n            color=['steelblue', 'tomato'], edgecolor='white')\naxes[1].set_title('Average Word Count per Article')\naxes[1].set_ylabel('Words')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nClass distribution and word count analysis\n\n\n\n\nA balanced subsample of 4,000 articles (2,000 real + 2,000 fake) was used for BERT fine-tuning, split 80/20 into training and test sets. For LLaMA 3, a separate balanced sample of 50 articles was drawn from the held-out test set due to computational constraints of running the model locally on CPU."
-  },
-  {
-    "objectID": "projects/list/project_2/index.html#bert-fine-tuning-approach",
-    "href": "projects/list/project_2/index.html#bert-fine-tuning-approach",
-    "title": "BERT vs LLaMA 3: Fake News Detection",
-    "section": "BERT Fine-Tuning Approach",
-    "text": "BERT Fine-Tuning Approach\nThe pre-trained bert-base-uncased model was fine-tuned using the HuggingFace Transformers library with the following configuration:\n\n\n\nHyperparameter\nValue\n\n\n\n\nLearning rate\n2e-5\n\n\nBatch size (train/eval)\n16 / 32\n\n\nEpochs\n3\n\n\nMax sequence length\n256 tokens\n\n\nWarmup steps\n200\n\n\nMetric for best model\nF1 (macro)\n\n\n\n\n\nCode\n# Simulated training curves based on actual results\nsteps = list(range(0, 600, 50))\ntrain_loss = [0.65, 0.25, 0.08, 0.03, 0.015, 0.01, 0.008, 0.005, 0.004, 0.003, 0.002, 0.002]\nepochs = [1, 2, 3]\nval_loss = [0.029, 0.017, 0.019]\n\nfig, axes = plt.subplots(1, 2, figsize=(8, 4))\naxes[0].plot(steps, train_loss, color='steelblue', linewidth=2)\naxes[0].set_title('Training Loss')\naxes[0].set_xlabel('Steps')\naxes[0].set_ylabel('Loss')\n\naxes[1].plot(epochs, val_loss, marker='o', color='tomato', linewidth=2)\naxes[1].set_title('Validation Loss per Epoch')\naxes[1].set_xlabel('Epoch')\naxes[1].set_ylabel('Loss')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nBERT training and validation loss curves"
-  },
-  {
-    "objectID": "projects/list/project_2/index.html#llama-3-few-shot-approach",
-    "href": "projects/list/project_2/index.html#llama-3-few-shot-approach",
-    "title": "BERT vs LLaMA 3: Fake News Detection",
-    "section": "LLaMA 3 Few-Shot Approach",
-    "text": "LLaMA 3 Few-Shot Approach\nLLaMA 3 was run locally using Ollama — an open-source runtime for large language models. No model weights were updated; instead, a few-shot prompt with three labelled examples was used to guide classification.\n\n\nCode\n# Few-shot prompt template used for LLaMA 3\nprompt_template = \"\"\"\nYou are an expert fact-checker. Classify each news article as REAL or FAKE.\nOnly reply with one word: REAL or FAKE.\n\nExamples:\nArticle: \"WASHINGTON (Reuters) - The U.S. Senate confirmed Rex Tillerson \nas secretary of state by a vote of 56-43.\"\nLabel: REAL\n\nArticle: \"BREAKING: Anonymous sources confirm the deep state is planning \nto overthrow the president using secret FEMA camps.\"\nLabel: FAKE\n\nArticle: \"Scientists ADMIT vaccines cause autism. The mainstream media \nis hiding the TRUTH from you!\"\nLabel: FAKE\n\nNow classify this article:\nArticle: \"{text}\"\nLabel:\n\"\"\"\nprint(prompt_template)\n\n\n\nYou are an expert fact-checker. Classify each news article as REAL or FAKE.\nOnly reply with one word: REAL or FAKE.\n\nExamples:\nArticle: \"WASHINGTON (Reuters) - The U.S. Senate confirmed Rex Tillerson \nas secretary of state by a vote of 56-43.\"\nLabel: REAL\n\nArticle: \"BREAKING: Anonymous sources confirm the deep state is planning \nto overthrow the president using secret FEMA camps.\"\nLabel: FAKE\n\nArticle: \"Scientists ADMIT vaccines cause autism. The mainstream media \nis hiding the TRUTH from you!\"\nLabel: FAKE\n\nNow classify this article:\nArticle: \"{text}\"\nLabel:"
-  },
-  {
-    "objectID": "projects/list/project_2/index.html#results-comparison",
-    "href": "projects/list/project_2/index.html#results-comparison",
-    "title": "BERT vs LLaMA 3: Fake News Detection",
-    "section": "Results Comparison",
-    "text": "Results Comparison\n\n\nCode\nimport plotly.graph_objects as go\n\nmetrics = ['Accuracy', 'Macro Precision', 'Macro Recall', 'Macro F1']\nbert_scores = [99.75, 99.75, 99.75, 99.75]\nllama_scores = [54.00, 76.04, 54.00, 41.65]\n\nfig = go.Figure()\nfig.add_trace(go.Bar(name='BERT (Fine-tuned)', x=metrics, y=bert_scores,\n                     marker_color='steelblue'))\nfig.add_trace(go.Bar(name='LLaMA 3 (Few-shot)', x=metrics, y=llama_scores,\n                     marker_color='tomato'))\n\nfig.update_layout(\n    title='Model Performance Comparison (%)',\n    yaxis_title='Score (%)',\n    barmode='group',\n    plot_bgcolor='rgba(0,0,0,0)',\n    paper_bgcolor='rgba(0,0,0,0)',\n    yaxis=dict(range=[0, 105])\n)\nfig.show()\n\n\n                                                \nHead-to-head performance comparison: BERT vs LLaMA 3\n\n\n\n\nCode\nfig, axes = plt.subplots(1, 2, figsize=(8, 4))\n\n# BERT confusion matrix\nbert_cm = np.array([[400, 0], [2, 398]])\ndisp1 = ConfusionMatrixDisplay(confusion_matrix=bert_cm, display_labels=['Fake', 'Real'])\ndisp1.plot(ax=axes[0], colorbar=False, cmap='Blues')\naxes[0].set_title('BERT (800 articles)')\n\n# LLaMA confusion matrix\nllama_cm = np.array([[2, 23], [0, 25]])\ndisp2 = ConfusionMatrixDisplay(confusion_matrix=llama_cm, display_labels=['Fake', 'Real'])\ndisp2.plot(ax=axes[1], colorbar=False, cmap='Oranges')\naxes[1].set_title('LLaMA 3 (50 articles)')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nConfusion matrices for both models"
-  },
-  {
-    "objectID": "projects/list/project_2/index.html#key-findings",
-    "href": "projects/list/project_2/index.html#key-findings",
-    "title": "BERT vs LLaMA 3: Fake News Detection",
-    "section": "Key Findings",
-    "text": "Key Findings\n\n\n\n\n\n\nTipMain Insights\n\n\n\n\nBERT achieved 99.75% accuracy with perfect recall on fake articles — only 2 out of 800 articles were misclassified\nLLaMA 3 achieved just 54% accuracy (barely above random chance) with a strong bias towards predicting “Real” — 23 out of 25 fake articles were missed\nThe performance gap is not a failure of LLaMA 3 as a model, but a limitation of few-shot prompting versus gradient-based fine-tuning for structured classification tasks\n\n\n\n\n\n\n\n\n\nWarningBusiness Recommendation\n\n\n\nFor deployment in a news organisation’s editorial pipeline, BERT is the clear choice — its 99.75% accuracy translates to roughly 25 misclassifications per 10,000 articles. However, a hybrid architecture combining BERT’s classification reliability with LLaMA 3’s generative explainability could offer the best of both worlds: BERT flags articles, LLaMA 3 explains why."
-  },
-  {
-    "objectID": "projects/list/project_2/index.html#ethical-considerations",
-    "href": "projects/list/project_2/index.html#ethical-considerations",
-    "title": "BERT vs LLaMA 3: Fake News Detection",
-    "section": "Ethical Considerations",
-    "text": "Ethical Considerations\nThis project evaluated both models against the EU AI Act (2024) and Trustworthy AI principles. Key considerations include maintaining human oversight in editorial decisions, addressing dataset bias (the ISOT dataset reflects Western media perspectives), and ensuring transparency in model decision-making. LLaMA 3’s local deployment via Ollama offers a privacy advantage, as no article text leaves the organisation’s infrastructure."
-  },
-  {
-    "objectID": "projects/list/project_2/index.html#methodology",
-    "href": "projects/list/project_2/index.html#methodology",
-    "title": "BERT vs LLaMA 3: Fake News Detection",
-    "section": "Methodology",
-    "text": "Methodology\n\n\n\n\n\nflowchart LR\n    A[ISOT Dataset&lt;br&gt;44,919 articles] --&gt; B[Preprocessing&lt;br&gt;Label assignment&lt;br&gt;Feature construction]\n    B --&gt; C[BERT Pipeline&lt;br&gt;4,000 articles&lt;br&gt;Fine-tuning]\n    B --&gt; D[LLaMA 3 Pipeline&lt;br&gt;50 articles&lt;br&gt;Few-shot prompting]\n    C --&gt; E[Evaluation&lt;br&gt;Accuracy, F1&lt;br&gt;Confusion Matrix]\n    D --&gt; E\n    E --&gt; F[Comparative&lt;br&gt;Analysis]\n\n\n\n\n\n\n\nThis project was completed as part of the MSc in Business Analytics, Advanced Analytics Techniques module at Dublin City University.\n\n\n\n← Previous: Bank Churn Analysis\n\nNext: Project 3 →"
   }
 ]
