@@ -1,17 +1,45 @@
 [
   {
-    "objectID": "projects/index.html",
-    "href": "projects/index.html",
-    "title": "Projects",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Financial Data Analysis\n\n\n\nPython\n\nFinance\n\nData Visualisation\n\n\n\nExploring trends in financial markets using Python.\n\n\n\nApr 10, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nlala\n\n\n\nPython\n\nFinance\n\nData Visualisation\n\n\n\nlalalal\n\n\n\nApr 10, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nChurn Analysis for Bank Customers\n\n\n\nPython\n\nMachine Learning\n\nData Visualisation\n\n\n\nUsing Python to predict customer churn in the banking sector, leveraging machine learning techniques and data visualisation.\n\n\n\nApr 10, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "Hi, I’m Alina Bolshakova. I am a finance professional with 11 years of experience spanning financial planning, budgeting, and performance analysis. Currently a Team Lead and Finance Business Partner, combining strategic decision-making and team management with hands-on analytical work — building financial models, writing SQL to extract insights, and translating numbers into actionable business strategies."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Alina Bolshakova",
+    "objectID": "about.html#background",
+    "href": "about.html#background",
+    "title": "About",
     "section": "",
-    "text": "Welcome to my portfolio! Here you will find my projects, research, and insights at the intersection of finance and data science.\nLearn more about me →"
+    "text": "Hi, I’m Alina Bolshakova. I am a finance professional with 11 years of experience spanning financial planning, budgeting, and performance analysis. Currently a Team Lead and Finance Business Partner, combining strategic decision-making and team management with hands-on analytical work — building financial models, writing SQL to extract insights, and translating numbers into actionable business strategies."
+  },
+  {
+    "objectID": "about.html#data-analysis",
+    "href": "about.html#data-analysis",
+    "title": "About",
+    "section": "Data Analysis",
+    "text": "Data Analysis\nAfter over a decade in finance, I recognised that the most impactful decisions are driven by data. This led me to explore data science — learning Python, building visualisations, and applying analytical techniques to real-world problems. I’m currently deepening these skills to bridge the gap between traditional finance and modern data-driven approaches."
+  },
+  {
+    "objectID": "about.html#skills",
+    "href": "about.html#skills",
+    "title": "About",
+    "section": "Skills",
+    "text": "Skills\n\n\n Financial Planning & Analysis\n SQL\n Python\n\n Data Visualisation\n Team Leadership\n Advanced Excel & Financial Modelling"
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About",
+    "section": "Education",
+    "text": "Education\n\n\n\n\n\n\nMSc in Business Analytics — Dublin City University\nBachelor’s and Master’s in Economics and Management — Voronezh State University"
+  },
+  {
+    "objectID": "about.html#beyond-work",
+    "href": "about.html#beyond-work",
+    "title": "About",
+    "section": "Beyond Work",
+    "text": "Beyond Work\nWhen I’m not crunching numbers, you’ll find me exploring Dublin, reading about behavioural economics, or experimenting with data visualisation techniques to tell compelling stories with data.\n\nFeel free to connect with me on LinkedIn or check out my work on GitHub."
   },
   {
     "objectID": "projects/list/project_1/index.html",
@@ -63,67 +91,11 @@
     "text": "Results\n\nThis project demonstrates the application of data science techniques to solve real-world business problems in the financial sector."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "projects/list/project_2/index.html",
+    "href": "projects/list/project_2/index.html",
+    "title": "Financial Data Analysis",
     "section": "",
-    "text": "Hi, I’m Alina Bolshakova. I am a finance professional with 11 years of experience spanning financial planning, budgeting, and performance analysis. Currently a Team Lead and Finance Business Partner, combining strategic decision-making and team management with hands-on analytical work — building financial models, writing SQL to extract insights, and translating numbers into actionable business strategies."
-  },
-  {
-    "objectID": "about.html#background",
-    "href": "about.html#background",
-    "title": "About",
-    "section": "",
-    "text": "Hi, I’m Alina Bolshakova. I am a finance professional with 11 years of experience spanning financial planning, budgeting, and performance analysis. Currently a Team Lead and Finance Business Partner, combining strategic decision-making and team management with hands-on analytical work — building financial models, writing SQL to extract insights, and translating numbers into actionable business strategies."
-  },
-  {
-    "objectID": "about.html#data-analysis",
-    "href": "about.html#data-analysis",
-    "title": "About",
-    "section": "Data Analysis",
-    "text": "Data Analysis\nAfter over a decade in finance, I recognised that the most impactful decisions are driven by data. This led me to explore data science — learning Python, building visualisations, and applying analytical techniques to real-world problems. I’m currently deepening these skills to bridge the gap between traditional finance and modern data-driven approaches."
-  },
-  {
-    "objectID": "about.html#skills",
-    "href": "about.html#skills",
-    "title": "About",
-    "section": "Skills",
-    "text": "Skills\n\n\n Financial Planning & Analysis\n SQL\n Python\n\n Data Visualisation\n Team Leadership\n Advanced Excel & Financial Modelling"
-  },
-  {
-    "objectID": "about.html#education",
-    "href": "about.html#education",
-    "title": "About",
-    "section": "Education",
-    "text": "Education\n\n\n\n\n\n\nMSc in Business Analytics — Dublin City University\nBachelor’s and Master’s in Economics and Management — Voronezh State University"
-  },
-  {
-    "objectID": "about.html#beyond-work",
-    "href": "about.html#beyond-work",
-    "title": "About",
-    "section": "Beyond Work",
-    "text": "Beyond Work\nWhen I’m not crunching numbers, you’ll find me exploring Dublin, reading about behavioural economics, or experimenting with data visualisation techniques to tell compelling stories with data.\n\nFeel free to connect with me on LinkedIn or check out my work on GitHub."
-  },
-  {
-    "objectID": "contact.html",
-    "href": "contact.html",
-    "title": "Contact",
-    "section": "",
-    "text": "I’m always open to connecting with fellow professionals, discussing data science, or exploring collaboration opportunities.\n\n\n\n\n alinabolshakovaa@gmail.com\n LinkedIn\n GitHub\n\n\n\n\n Dublin, Ireland"
-  },
-  {
-    "objectID": "contact.html#get-in-touch",
-    "href": "contact.html#get-in-touch",
-    "title": "Contact",
-    "section": "",
-    "text": "I’m always open to connecting with fellow professionals, discussing data science, or exploring collaboration opportunities.\n\n\n\n\n alinabolshakovaa@gmail.com\n LinkedIn\n GitHub\n\n\n\n\n Dublin, Ireland"
-  },
-  {
-    "objectID": "contact.html#references",
-    "href": "contact.html#references",
-    "title": "Contact",
-    "section": "References",
-    "text": "References\nAvailable upon request. Please feel free to reach out via email or LinkedIn."
+    "text": "Project content goes here…"
   },
   {
     "objectID": "reflection.html",
@@ -173,5 +145,47 @@
     "title": "Reflection",
     "section": "Final Thoughts",
     "text": "Final Thoughts\nThis module has given me the confidence to bridge the gap between finance and technology. The combination of technical skills and professional presentation is something I will carry forward into every future project.\n\n“The best way to predict the future is to create it.” — Peter Drucker"
+  },
+  {
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact",
+    "section": "",
+    "text": "I’m always open to connecting with fellow professionals, discussing data science, or exploring collaboration opportunities.\n\n\n\n\n alinabolshakovaa@gmail.com\n LinkedIn\n GitHub\n\n\n\n\n Dublin, Ireland"
+  },
+  {
+    "objectID": "contact.html#get-in-touch",
+    "href": "contact.html#get-in-touch",
+    "title": "Contact",
+    "section": "",
+    "text": "I’m always open to connecting with fellow professionals, discussing data science, or exploring collaboration opportunities.\n\n\n\n\n alinabolshakovaa@gmail.com\n LinkedIn\n GitHub\n\n\n\n\n Dublin, Ireland"
+  },
+  {
+    "objectID": "contact.html#references",
+    "href": "contact.html#references",
+    "title": "Contact",
+    "section": "References",
+    "text": "References\nAvailable upon request. Please feel free to reach out via email or LinkedIn."
+  },
+  {
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Financial Data Analysis\n\n\n\nPython\n\nFinance\n\nData Visualisation\n\n\n\nExploring trends in financial markets using Python.\n\n\n\nApr 10, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nlala\n\n\n\nPython\n\nFinance\n\nData Visualisation\n\n\n\nlalalal\n\n\n\nApr 10, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nChurn Analysis for Bank Customers\n\n\n\nPython\n\nMachine Learning\n\nData Visualisation\n\n\n\nUsing Python to predict customer churn in the banking sector, leveraging machine learning techniques and data visualisation.\n\n\n\nApr 10, 2026\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/list/project_3/index.html",
+    "href": "projects/list/project_3/index.html",
+    "title": "lala",
+    "section": "",
+    "text": "Project content goes here…"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Alina Bolshakova",
+    "section": "",
+    "text": "Welcome to my portfolio! Here you will find my projects, research, and insights at the intersection of finance and data science.\nLearn more about me →"
   }
 ]
