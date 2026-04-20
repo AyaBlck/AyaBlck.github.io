@@ -95,14 +95,14 @@
     "href": "projects/list/project_2/index.html",
     "title": "BERT vs LLaMA 3: Fake News Detection",
     "section": "",
-    "text": "Disinformation has become a defining challenge of the digital age. This project compares two fundamentally different AI approaches to fake news detection: BERT (a discriminative model, fine-tuned on labelled data) and LLaMA 3 (a generative model, using few-shot prompting via Ollama). The goal was to determine which approach is more suitable for deployment in a news organisation’s editorial pipeline.\n View BERT notebook on GitHub  View LLaMA 3 notebook on GitHub"
+    "text": "Disinformation has become a defining challenge of the digital age[^1]. This project compares two fundamentally different AI approaches to fake news detection: BERT (a discriminative model, fine-tuned on labelled data) and LLaMA 3 (a generative model, using few-shot prompting via Ollama). The goal was to determine which approach is more suitable for deployment in a news organisation’s editorial pipeline.\n View BERT notebook on GitHub  View LLaMA 3 notebook on GitHub"
   },
   {
     "objectID": "projects/list/project_2/index.html#overview",
     "href": "projects/list/project_2/index.html#overview",
     "title": "BERT vs LLaMA 3: Fake News Detection",
     "section": "",
-    "text": "Disinformation has become a defining challenge of the digital age. This project compares two fundamentally different AI approaches to fake news detection: BERT (a discriminative model, fine-tuned on labelled data) and LLaMA 3 (a generative model, using few-shot prompting via Ollama). The goal was to determine which approach is more suitable for deployment in a news organisation’s editorial pipeline.\n View BERT notebook on GitHub  View LLaMA 3 notebook on GitHub"
+    "text": "Disinformation has become a defining challenge of the digital age[^1]. This project compares two fundamentally different AI approaches to fake news detection: BERT (a discriminative model, fine-tuned on labelled data) and LLaMA 3 (a generative model, using few-shot prompting via Ollama). The goal was to determine which approach is more suitable for deployment in a news organisation’s editorial pipeline.\n View BERT notebook on GitHub  View LLaMA 3 notebook on GitHub"
   },
   {
     "objectID": "projects/list/project_2/index.html#dataset",
@@ -158,7 +158,7 @@
     "href": "projects/list/project_2/index.html#methodology",
     "title": "BERT vs LLaMA 3: Fake News Detection",
     "section": "Methodology",
-    "text": "Methodology\n\n\n\n\n\nflowchart LR\n    A[ISOT Dataset&lt;br&gt;44,919 articles] --&gt; B[Preprocessing&lt;br&gt;Label assignment&lt;br&gt;Feature construction]\n    B --&gt; C[BERT Pipeline&lt;br&gt;4,000 articles&lt;br&gt;Fine-tuning]\n    B --&gt; D[LLaMA 3 Pipeline&lt;br&gt;50 articles&lt;br&gt;Few-shot prompting]\n    C --&gt; E[Evaluation&lt;br&gt;Accuracy, F1&lt;br&gt;Confusion Matrix]\n    D --&gt; E\n    E --&gt; F[Comparative&lt;br&gt;Analysis]\n\n\n\n\n\n\n\nThis project was completed as part of the MSc in Business Analytics, Advanced Analytics Techniques module at Dublin City University.\nDue to computational restraints, visualisations on this page are recreated manually.\n\n\n\n← Previous: Bank Churn Analysis\n\nNext: Fraud Detection Using Statistics and Machine Learning →"
+    "text": "Methodology\n\n\n\n\n\nflowchart LR\n    A[ISOT Dataset&lt;br&gt;44,919 articles] --&gt; B[Preprocessing&lt;br&gt;Label assignment&lt;br&gt;Feature construction]\n    B --&gt; C[BERT Pipeline&lt;br&gt;4,000 articles&lt;br&gt;Fine-tuning]\n    B --&gt; D[LLaMA 3 Pipeline&lt;br&gt;50 articles&lt;br&gt;Few-shot prompting]\n    C --&gt; E[Evaluation&lt;br&gt;Accuracy, F1&lt;br&gt;Confusion Matrix]\n    D --&gt; E\n    E --&gt; F[Comparative&lt;br&gt;Analysis]\n\n\n\n\n\n\n\nThis project was completed as part of the MSc in Business Analytics, Advanced Analytics Techniques module at Dublin City University.\nDue to computational restraints, visualisations on this page are recreated manually."
   },
   {
     "objectID": "reflection.html",
@@ -179,7 +179,7 @@
     "href": "reflection.html#technical-skills-acquired",
     "title": "Reflection",
     "section": "Technical Skills Acquired",
-    "text": "Technical Skills Acquired\n\nGit & Version Control\nBefore this module I used Git just once only for uploading my Python notebooks. Learning to commit, push, and manage repositories was initially challenging, but thanks to very detailed and understandable instructions it become very easy to process.\n\n\nQuarto & SCSS\nI already had experience with Web Design but more from a vusual perspective. Learning YAML, SCSS and Markdown helped me get a different perspective on it. Styling websites with SCSS proved to be one of the most enjoyable aspects of the project.\n\n\nMarkdown & Rich Content\nLearning all the different ways to customise the content through Markdown available in Quarto such as making callout blocks, including diagrams and tables of content, adding code folding, etc. showed me how much can be achieved without touching raw HTML.\n\n\nVS Code & Workflow\nUsing VS Code to edit files and make commits, run commands, check out the site, as well as use Git brought everything together into one efficient workflow."
+    "text": "Technical Skills Acquired\n\nGit & Version Control\nBefore this module I used Git just once only for uploading my Python notebooks. Learning to commit, push, and manage repositories was initially challenging, but thanks to very detailed and understandable instructions it become very easy to process.\n\n\nQuarto & SCSS\nI already had experience with Web Design but more from a visual perspective. Learning YAML, SCSS and Markdown helped me get a different perspective on it. Styling websites with SCSS proved to be one of the most enjoyable aspects of the project.\n\n\nMarkdown & Rich Content\nLearning all the different ways to customise the content through Markdown available in Quarto such as making callout blocks, including diagrams and tables of content, adding code folding, etc. showed me how much can be achieved without touching raw HTML.\n\n\nVS Code & Workflow\nUsing VS Code to edit files and make commits, run commands, check out the site, as well as use Git brought everything together into one efficient workflow."
   },
   {
     "objectID": "reflection.html#challenges-how-i-overcame-them",
@@ -292,5 +292,12 @@
     "title": "Alina Bolshakova",
     "section": "",
     "text": "Welcome to my portfolio! Here you will find my projects, research, and insights at the intersection of finance and data science.\nLearn more about me →"
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#sharma-k.-et-al.-2019.-combating-fake-news-a-survey-on-identification-and-mitigation-techniques-acm-transactions-on-intelligent-systems-and-technology.",
+    "href": "projects/list/project_2/index.html#sharma-k.-et-al.-2019.-combating-fake-news-a-survey-on-identification-and-mitigation-techniques-acm-transactions-on-intelligent-systems-and-technology.",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "[^1]: Sharma, K. et al. (2019). ‘Combating Fake News: A Survey on Identification and Mitigation Techniques,’ ACM Transactions on Intelligent Systems and Technology.",
+    "text": "[^1]: Sharma, K. et al. (2019). ‘Combating Fake News: A Survey on Identification and Mitigation Techniques,’ ACM Transactions on Intelligent Systems and Technology.\n\n\n← Previous: Bank Churn Analysis\n\nNext: Fraud Detection Using Statistics and Machine Learning →"
   }
 ]
