@@ -158,56 +158,56 @@
     "href": "projects/list/project_2/index.html#methodology",
     "title": "BERT vs LLaMA 3: Fake News Detection",
     "section": "Methodology",
-    "text": "Methodology\n\n\n\n\n\nflowchart LR\n    A[ISOT Dataset&lt;br&gt;44,919 articles] --&gt; B[Preprocessing&lt;br&gt;Label assignment&lt;br&gt;Feature construction]\n    B --&gt; C[BERT Pipeline&lt;br&gt;4,000 articles&lt;br&gt;Fine-tuning]\n    B --&gt; D[LLaMA 3 Pipeline&lt;br&gt;50 articles&lt;br&gt;Few-shot prompting]\n    C --&gt; E[Evaluation&lt;br&gt;Accuracy, F1&lt;br&gt;Confusion Matrix]\n    D --&gt; E\n    E --&gt; F[Comparative&lt;br&gt;Analysis]\n\n\n\n\n\n\n\nThis project was completed as part of the MSc in Business Analytics, Advanced Analytics Techniques module at Dublin City University.\n\n\n\n← Previous: Bank Churn Analysis\n\nNext: Project 3 →"
+    "text": "Methodology\n\n\n\n\n\nflowchart LR\n    A[ISOT Dataset&lt;br&gt;44,919 articles] --&gt; B[Preprocessing&lt;br&gt;Label assignment&lt;br&gt;Feature construction]\n    B --&gt; C[BERT Pipeline&lt;br&gt;4,000 articles&lt;br&gt;Fine-tuning]\n    B --&gt; D[LLaMA 3 Pipeline&lt;br&gt;50 articles&lt;br&gt;Few-shot prompting]\n    C --&gt; E[Evaluation&lt;br&gt;Accuracy, F1&lt;br&gt;Confusion Matrix]\n    D --&gt; E\n    E --&gt; F[Comparative&lt;br&gt;Analysis]\n\n\n\n\n\n\n\nThis project was completed as part of the MSc in Business Analytics, Advanced Analytics Techniques module at Dublin City University.\nDue to computational restraints, visualisations on this page are recreated manually.\n\n\n\n← Previous: Bank Churn Analysis\n\nNext: Fraud Detection Using Statistics and Machine Learning →"
   },
   {
     "objectID": "reflection.html",
     "href": "reflection.html",
     "title": "Reflection",
     "section": "",
-    "text": "This module has been a transformative experience, taking me from a finance professional with limited coding experience to someone who can build a website, analyse data with Python, and manage projects with Git."
+    "text": "Thanks to this module I deepened my expertise in coding, which is very valuable for a finance professional who is seeking to transition into data analytics. Now I am equipped with enough knowledge to build a website to showcase my projects build during a study in DCU and also outside of it."
   },
   {
     "objectID": "reflection.html#my-learning-journey",
     "href": "reflection.html#my-learning-journey",
     "title": "Reflection",
     "section": "",
-    "text": "This module has been a transformative experience, taking me from a finance professional with limited coding experience to someone who can build a website, analyse data with Python, and manage projects with Git."
+    "text": "Thanks to this module I deepened my expertise in coding, which is very valuable for a finance professional who is seeking to transition into data analytics. Now I am equipped with enough knowledge to build a website to showcase my projects build during a study in DCU and also outside of it."
   },
   {
     "objectID": "reflection.html#technical-skills-acquired",
     "href": "reflection.html#technical-skills-acquired",
     "title": "Reflection",
     "section": "Technical Skills Acquired",
-    "text": "Technical Skills Acquired\n\nGit & Version Control\nBefore this module, I had never used Git. Learning to commit, push, and manage repositories was initially challenging, but it quickly became second nature. Understanding version control has changed how I think about managing work — not just code, but any project that evolves over time.\n\n\n\n\n\n\nNoteKey Takeaway\n\n\n\nGit is not just a tool for developers — it’s a mindset for tracking progress and collaborating effectively.\n\n\n\n\nQuarto & Web Development\nBuilding this website from scratch taught me how content, structure, and design come together. Learning YAML configuration, SCSS styling, and Markdown formatting gave me a new appreciation for web development. Customising themes and creating a cohesive visual identity was one of the most rewarding parts of this project.\n\n\nPython & Data Science\nMy Python skills grew significantly through the projects in this module. Moving from basic scripts to building interactive visualisations with Plotly and applying machine learning models was a steep but rewarding learning curve."
+    "text": "Technical Skills Acquired\n\nGit & Version Control\nBefore this module I used Git just once only for uploading my Python notebooks. Learning to commit, push, and manage repositories was initially challenging, but thanks to very detailed and understandable instructions it become very easy to process.\n\n\nQuarto & SCSS\nI already had experience with Web Design but more from a vusual perspective. Learning YAML, SCSS and Markdown helped me get a different perspective on it. Styling websites with SCSS proved to be one of the most enjoyable aspects of the project.\n\n\nMarkdown & Rich Content\nLearning all the different ways to customise the content through Markdown available in Quarto such as making callout blocks, including diagrams and tables of content, adding code folding, etc. showed me how much can be achieved without touching raw HTML.\n\n\nVS Code & Workflow\nUsing VS Code to edit files and make commits, run commands, check out the site, as well as use Git brought everything together into one efficient workflow."
   },
   {
     "objectID": "reflection.html#challenges-how-i-overcame-them",
     "href": "reflection.html#challenges-how-i-overcame-them",
     "title": "Reflection",
     "section": "Challenges & How I Overcame Them",
-    "text": "Challenges & How I Overcame Them\n\n“Every error message is a lesson in disguise.”\n\nOne of the biggest challenges was understanding the relationship between Git, GitHub, and VS Code. Early on, I accidentally pushed files to the wrong repository and had to learn how to fix repository structures. This taught me the importance of understanding your tools before using them.\nAnother challenge was getting GitHub Pages to work correctly — dealing with Jekyll conflicts, folder structures, and deployment settings required patience and systematic debugging."
+    "text": "Challenges & How I Overcame Them\n\n“Every error message is a lesson in disguise.”\n\nOne of the biggest challenges was understanding the repositories and folders relationships. Early on, I accidentally pushed files to the wrong repository and had to learn how to fix its structures. To overcome this I needed to learn new commands and be more careful from the beginning of the project.\nAnother challenge was understanding navigation between projects. I didn’t like the automatic navigation via sidebar, so I had to learn how to create custom navigation links in the content of each project page."
   },
   {
     "objectID": "reflection.html#connecting-to-my-professional-goals",
     "href": "reflection.html#connecting-to-my-professional-goals",
     "title": "Reflection",
     "section": "Connecting to My Professional Goals",
-    "text": "Connecting to My Professional Goals\nAs a finance professional transitioning into data science, the skills from this module are directly applicable to my career goals:\n\nData storytelling — presenting insights through interactive visualisations\nAutomation — using Python to streamline repetitive financial analysis tasks\nProfessional presence — having a portfolio website to showcase my work\nCollaboration — using Git for team projects and version control\n\n\n\n\n\n\n\nTipLooking Forward\n\n\n\nI plan to continue developing my data science skills, focusing on machine learning applications in finance, and contributing to open-source projects. This website will serve as a living portfolio that grows with my career."
+    "text": "Connecting to My Professional Goals\nAs a finance professional building a data science portfolio, the skills I acquired are deeply connected with my goals:\n\nProfessional presence — having a polished portfolio website to showcase my work\nTechnical communication — presenting projects with interactive visualisations, clean layouts, and clear writing\nVersion control — a foundational skill for any collaborative or technical role\nWeb literacy — understanding how sites are built, styled, and deployed\n\n\n\n\n\n\n\nTipLooking Forward\n\n\n\nI plan to continue developing my data science skills, focusing on machine learning applications in finance, and contributing to open-source projects. This website will serve as a living portfolio that grows with my career."
   },
   {
     "objectID": "reflection.html#what-i-would-do-differently",
     "href": "reflection.html#what-i-would-do-differently",
     "title": "Reflection",
     "section": "What I Would Do Differently",
-    "text": "What I Would Do Differently\nIf I were to start this module again, I would:\n\nSet up my Git repository structure correctly from the beginning\nSpend more time planning the website design before coding\nStart the Python projects earlier to allow more time for experimentation"
+    "text": "What I Would Do Differently\nIf I were to start this module again, I would:\n\nSet up my Git repository structure correctly from the very beginning\nOpen only the project folder in VS Code — never a parent directory\nSpend more time planning the website design before writing any SCSS\nCommit more frequently with descriptive messages from day one"
   },
   {
     "objectID": "reflection.html#final-thoughts",
     "href": "reflection.html#final-thoughts",
     "title": "Reflection",
     "section": "Final Thoughts",
-    "text": "Final Thoughts\nThis module has given me the confidence to bridge the gap between finance and technology. The combination of technical skills and professional presentation is something I will carry forward into every future project.\n\n“The best way to predict the future is to create it.” — Peter Drucker"
+    "text": "Final Thoughts\nThis module gave me the confidence to build something from scratch and put it on the internet. The combination of technical tools — Quarto, Git, SCSS, Markdown — and the design thinking required to make it all cohesive was a uniquely satisfying learning experience."
   },
   {
     "objectID": "contact.html",

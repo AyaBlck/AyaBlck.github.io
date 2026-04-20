@@ -4,39 +4,39 @@ title: "Reflection"
 
 ## My Learning Journey
 
-This module has been a transformative experience, taking me from a finance professional with limited coding experience to someone who can build a website, analyse data with Python, and manage projects with Git.
+Thanks to this module I deepened my expertise in coding, which is very valuable for a finance professional who is seeking to transition into data analytics. Now I am equipped with enough knowledge to build a website to showcase my projects build during a study in DCU and also outside of it.
 
 ## Technical Skills Acquired
 
 ### Git & Version Control
 
-Before this module, I had never used Git. Learning to commit, push, and manage repositories was initially challenging, but it quickly became second nature. Understanding version control has changed how I think about managing work — not just code, but any project that evolves over time.
+Before this module I used Git just once only for uploading my Python notebooks. Learning to commit, push, and manage repositories was initially challenging, but thanks to very detailed and understandable instructions it become very easy to process. 
 
-::: {.callout-note}
-## Key Takeaway
-Git is not just a tool for developers — it's a mindset for tracking progress and collaborating effectively.
-:::
+### Quarto & SCSS
 
-### Quarto & Web Development
+I already had experience with Web Design but more from a vusual perspective. Learning YAML, SCSS and Markdown helped me get a different perspective on it. Styling websites with SCSS proved to be one of the most enjoyable aspects of the project.
 
-Building this website from scratch taught me how content, structure, and design come together. Learning YAML configuration, SCSS styling, and Markdown formatting gave me a new appreciation for web development. Customising themes and creating a cohesive visual identity was one of the most rewarding parts of this project.
+### Markdown & Rich Content
 
-### Python & Data Science
+Learning all the different ways to customise the content through Markdown available in Quarto such as making callout blocks, including diagrams and tables of content, adding code folding, etc. showed me how much can be achieved without touching raw HTML.
 
-My Python skills grew significantly through the projects in this module. Moving from basic scripts to building interactive visualisations with Plotly and applying machine learning models was a steep but rewarding learning curve.
+### VS Code & Workflow
+
+Using VS Code to edit files and make commits, run commands, check out the site, as well as use Git brought everything together into one efficient workflow.
+
 
 ```{python}
 #| echo: false
 
 import plotly.graph_objects as go
 
-skills = ['Git', 'Quarto', 'Python', 'Data Viz', 'SCSS/CSS', 'Markdown']
-before = [1, 0, 2, 1, 0, 1]
-after = [7, 8, 7, 8, 6, 9]
+skills = ['Git', 'Quarto', 'SCSS/CSS', 'Markdown', 'VS Code', 'Web Design']
+before = [1, 0, 1, 4, 1, 5]
+after = [6, 7, 6, 7, 6, 6]
 
 fig = go.Figure()
-fig.add_trace(go.Bar(name='Before Module', x=skills, y=before, marker_color='#B8B4AF'))
-fig.add_trace(go.Bar(name='After Module', x=skills, y=after, marker_color='#8C7A6B'))
+fig.add_trace(go.Bar(name='Before Module', x=skills, y=before, marker_color='#6f8566'))
+fig.add_trace(go.Bar(name='After Module', x=skills, y=after, marker_color='#71c97e'))
 fig.update_layout(
     title='Skills Development: Before vs After',
     yaxis_title='Confidence Level (1-10)',
@@ -51,18 +51,19 @@ fig.show()
 
 > "Every error message is a lesson in disguise."
 
-One of the biggest challenges was understanding the relationship between Git, GitHub, and VS Code. Early on, I accidentally pushed files to the wrong repository and had to learn how to fix repository structures. This taught me the importance of understanding your tools before using them.
+One of the biggest challenges was understanding the repositories and folders relationships. Early on, I accidentally pushed files to the wrong repository and had to learn how to fix its structures. To overcome this I needed to learn new commands and be more careful from the beginning of the project.
 
-Another challenge was getting GitHub Pages to work correctly — dealing with Jekyll conflicts, folder structures, and deployment settings required patience and systematic debugging.
+Another challenge was understanding navigation between projects. I didn't like the automatic navigation via sidebar, so I had to learn how to create custom navigation links in the content of each project page. 
 
 ## Connecting to My Professional Goals
 
-As a finance professional transitioning into data science, the skills from this module are directly applicable to my career goals:
+As a finance professional building a data science portfolio, the skills I acquired are deeply connected with my goals:
 
-- **Data storytelling** — presenting insights through interactive visualisations
-- **Automation** — using Python to streamline repetitive financial analysis tasks
-- **Professional presence** — having a portfolio website to showcase my work
-- **Collaboration** — using Git for team projects and version control
+- **Professional presence** — having a polished portfolio website to showcase my work
+- **Technical communication** — presenting projects with interactive visualisations, clean layouts, and clear writing
+- **Version control** — a foundational skill for any collaborative or technical role
+- **Web literacy** — understanding how sites are built, styled, and deployed
+
 
 ::: {.callout-tip}
 ## Looking Forward
@@ -73,14 +74,11 @@ I plan to continue developing my data science skills, focusing on machine learni
 
 If I were to start this module again, I would:
 
-1. Set up my Git repository structure correctly from the beginning
-2. Spend more time planning the website design before coding
-3. Start the Python projects earlier to allow more time for experimentation
+1. Set up my Git repository structure correctly from the very beginning
+2. Open only the project folder in VS Code — never a parent directory
+3. Spend more time planning the website design before writing any SCSS
+4. Commit more frequently with descriptive messages from day one
 
 ## Final Thoughts
 
-This module has given me the confidence to bridge the gap between finance and technology. The combination of technical skills and professional presentation is something I will carry forward into every future project.
-
----
-
-*"The best way to predict the future is to create it."* — Peter Drucker
+This module gave me the confidence to build something from scratch and put it on the internet. The combination of technical tools — Quarto, Git, SCSS, Markdown — and the design thinking required to make it all cohesive was a uniquely satisfying learning experience.
