@@ -14,7 +14,7 @@ Before this module I used Git just once only for uploading my Python notebooks. 
 
 ### Quarto & SCSS
 
-I already had experience with Web Design but more from a vusual perspective. Learning YAML, SCSS and Markdown helped me get a different perspective on it. Styling websites with SCSS proved to be one of the most enjoyable aspects of the project.
+I already had experience with Web Design but more from a visual perspective. Learning YAML, SCSS and Markdown helped me get a different perspective on it. Styling websites with SCSS proved to be one of the most enjoyable aspects of the project.
 
 ### Markdown & Rich Content
 
