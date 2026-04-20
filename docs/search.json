@@ -63,11 +63,18 @@
     "text": "Data Loading & Exploration\n\n\nCode\nimport pandas as pd\nimport seaborn as sns\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport warnings\nwarnings.filterwarnings('ignore')\nsns.set_style('whitegrid')\n\nbank_data = pd.read_csv(\"bank_new_dataset.csv\")\nbank_data.head()\n\n\n\n\n\n\n\n\n\nuserid\nscore\ncity\ngender\nage\nequity\nbalance\nproducts\ncredit_card\nlast_activity\nsalary\nchurn\n\n\n\n\n0\n258835\n838.0\nРостов\nЖ\n32\n1\n377652.29\n2\n0\n1\n105665.06\n1\n\n\n1\n96660\n845.0\nРостов\nЖ\n31\n3\n214980.98\n5\n0\n1\n62058.62\n0\n\n\n2\n99838\n869.0\nРостов\nЖ\n30\n4\n467040.46\n2\n1\n1\n156945.23\n1\n\n\n3\n216099\n856.0\nРыбинск\nЖ\n25\n4\n475727.88\n4\n0\n1\n19502.68\n0\n\n\n4\n120240\n873.0\nРыбинск\nЖ\n37\n3\n1350858.40\n4\n0\n1\n119804.41\n0"
   },
   {
-    "objectID": "projects/list/project_1/index.html#data-cleaning",
-    "href": "projects/list/project_1/index.html#data-cleaning",
+    "objectID": "projects/list/project_1/index.html#data-quality-assessment",
+    "href": "projects/list/project_1/index.html#data-quality-assessment",
     "title": "Churn Analysis for Bank Customers",
-    "section": "Data Cleaning",
-    "text": "Data Cleaning\n\n\nCode\nb_data = bank_data[(bank_data['balance'] &lt; 2300000) | (bank_data['balance'].isna())]\nb_data = b_data[b_data['salary'] &lt; 300000]\nb_data.head()\n\n\n\n\n\n\n\n\n\nuserid\nscore\ncity\ngender\nage\nequity\nbalance\nproducts\ncredit_card\nlast_activity\nsalary\nchurn\n\n\n\n\n0\n258835\n838.0\nРостов\nЖ\n32\n1\n377652.29\n2\n0\n1\n105665.06\n1\n\n\n1\n96660\n845.0\nРостов\nЖ\n31\n3\n214980.98\n5\n0\n1\n62058.62\n0\n\n\n2\n99838\n869.0\nРостов\nЖ\n30\n4\n467040.46\n2\n1\n1\n156945.23\n1\n\n\n3\n216099\n856.0\nРыбинск\nЖ\n25\n4\n475727.88\n4\n0\n1\n19502.68\n0\n\n\n4\n120240\n873.0\nРыбинск\nЖ\n37\n3\n1350858.40\n4\n0\n1\n119804.41\n0"
+    "section": "Data Quality Assessment",
+    "text": "Data Quality Assessment\nWhile checking the statistics of the dataset, I noticed that some numerical features had extreme outliers, so I created boxplots to visualise the distribution of these features and identify the outliers that needed to be handled before proceeding with the analysis.\n\n\nCode\n# columns for boxplots\ncols = ['score',\n       'age',\n       'equity',\n       'balance',\n       'salary']\n\n# boxplots for numerical features\nplt.figure(figsize=(8,7))\nfor i, col in enumerate(cols):\n    sns.boxplot(bank_data[col], color=sns.color_palette('Set3')[i+1], ax=plt.subplot(3, 2, i+1))\n    plt.title('Boxplot for {}'.format(col), fontsize=17)\n    plt.xlabel(col)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\nAs expected, the balance sheet and salary data contain many outliers. The “equity” and “age” features also contain outliers, but they are few and small, so we decided to leave them unchanged. To more accurately determine which data to discard, we calculated the 95th, 97.5, and 99th percentiles. After this, we decided to discard balance and salary data at the 95th percentile."
+  },
+  {
+    "objectID": "projects/list/project_1/index.html#exploratory-data-analysis",
+    "href": "projects/list/project_1/index.html#exploratory-data-analysis",
+    "title": "Churn Analysis for Bank Customers",
+    "section": "Exploratory Data Analysis",
+    "text": "Exploratory Data Analysis\nThe first step was to understand how each feature relates to customer churn. The two charts below highlight credit score and city distributions, which showed interesting initial patterns.\n\n\nCode\n# Dataset preprocessing\nbank_data['churn'] = bank_data['churn'].astype('int')\nbank_data['gender'] = bank_data['gender'].replace('Ж', 0)\nbank_data['gender'] = bank_data['gender'].replace('М', 1)\n\nb_data = bank_data.query('balance &lt; 2300000 or balance.isna()')\nb_data = b_data.query('salary &lt; 300000')\nbd = pd.get_dummies(b_data)\n\n# churn distribution by score and age\nfig, axes = plt.subplots(1, 2, figsize=(8, 3))\nsns.histplot(data=b_data, x='score', stat='density', palette='Set2',\n             ax=axes[0], hue='churn', multiple='dodge', common_norm=False)\naxes[0].set_title('Churn by Credit Score')\n\nsns.histplot(data=b_data, x='age', stat='density', palette='Set2',\n             ax=axes[1], hue='churn', multiple='dodge', common_norm=False)\naxes[1].set_title('Churn by Age')\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nChurn distribution by credit score and age\n\n\n\n\n\n\n\n\n\n\nNoteClick to see all feature distributions\n\n\n\n\n\n\n\nCode\nplt.figure(figsize=(8, 20))\nfor i, col in enumerate(bd.drop(['churn', 'userid'], axis=1).columns):\n    sns.histplot(data=bd, x=col, stat='density', palette='Set2',\n                 ax=plt.subplot(6, 2, i+1), hue='churn',\n                 multiple='dodge', common_norm=False)\n    plt.title(f'Churn distribution for {col}', fontsize=15)\n    plt.xlabel(col)\n    plt.ylabel('Frequency')\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nChurn distribution across all features\n\n\n\n\n\n\n\nAlso we created a correlation matrix to understand the relationships between features and identify any multicollinearity issues.\n\n\nCode\n# correlation matrix\ncorr = bd.corr()\nplt.figure(figsize=(8,6))\nsns.heatmap(corr, annot=True, fmt='.0%', cmap='vlag');\nplt.title('Correlation Matrix', fontsize=17);\n\n\n\n\n\nCorrelation matrix of features\n\n\n\n\nThe highest correlation—44%—is between credit rating and the number of properties owned. This indicator likely carries significant weight when calculating the rating. We also see an average correlation (36%) between rating and churn, with a high rating corresponding to high churn.\nWe also see an average correlation of 33% between balance and salary. Also, having a credit card has an average negative correlation with churn.\nAfter calculating the correlation matrix, we decided to calculate the phik correlation matrix to better understand the relationships between features, especially since some of them are categorical.\n\n\nCode\nplt.figure(figsize=(8,7))\nplt.subplot(1, 2, 1)\nsns.heatmap(pd.DataFrame(corr['churn']).drop(index='churn').sort_values('churn', ascending=False), \n                 annot=True, fmt='.0%', cmap='YlOrBr', cbar=False);\nplt.title('Features Influencing Churn (Pearson)', fontsize=17);\n\nplt.subplot(1, 2, 2)\nsns.heatmap(pd.DataFrame(phik['churn']).drop(index='churn').sort_values('churn', ascending=False), \n                 annot=True, fmt='.0%', cmap='YlOrBr', cbar=False);\nplt.title('Features Influencing Churn (Phik)', fontsize=17);\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nFeatures influencing churn: Pearson vs Phik correlation"
   },
   {
     "objectID": "projects/list/project_1/index.html#key-findings",
@@ -75,13 +82,6 @@
     "title": "Churn Analysis for Bank Customers",
     "section": "Key Findings",
     "text": "Key Findings\n\n\n\n\n\n\nTipMain Insights\n\n\n\n\nCredit score is the strongest churn driver — as scores increase, so does the churn rate\nNumber of products reveals a clear pattern: customers with 1 product have only 10% churn, those with 2 products almost never leave, but customers with 3-4 products churn almost entirely\nAge shows increasing churn from age 20 to 40, a small spike at 55, and almost no churn after 60\nRecent activity correlates with churn — likely because customers transfer funds before closing accounts\nIncome and balance — customers with fewer funds are less likely to churn, while those earning above 45,000 show higher churn rates"
-  },
-  {
-    "objectID": "projects/list/project_1/index.html#methodology",
-    "href": "projects/list/project_1/index.html#methodology",
-    "title": "Churn Analysis for Bank Customers",
-    "section": "Methodology",
-    "text": "Methodology\nThe analysis followed these steps:\n\nData cleaning and preprocessing\nExploratory data analysis with interactive visualisations\nFeature engineering\nModel training and evaluation\n\n\n“The goal is not just to predict churn, but to understand why customers leave.”"
   },
   {
     "objectID": "projects/list/project_1/index.html#results",
@@ -93,9 +93,9 @@
   {
     "objectID": "projects/list/project_2/index.html",
     "href": "projects/list/project_2/index.html",
-    "title": "Financial Data Analysis",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
     "section": "",
-    "text": "Project content goes here…\n\n\n\n← Previous: Bank Churn Analysis\n\nNext: Project 3 →"
+    "text": "Disinformation has become a defining challenge of the digital age. This project compares two fundamentally different AI approaches to fake news detection: BERT (a discriminative model, fine-tuned on labelled data) and LLaMA 3 (a generative model, using few-shot prompting via Ollama). The goal was to determine which approach is more suitable for deployment in a news organisation’s editorial pipeline.\n View BERT notebook on GitHub  View LLaMA 3 notebook on GitHub"
   },
   {
     "objectID": "reflection.html",
@@ -172,7 +172,7 @@
     "href": "projects/index.html",
     "title": "Projects",
     "section": "",
-    "text": "Churn Analysis for Bank Customers\n\n\n\nPython\n\nStatistics\n\nData Visualisation\n\n\n\nUsing Python to analyse customer churn in the banking sector, leveraging statistical methods and data visualisation.\n\n\n\nApr 18, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nFinancial Data Analysis\n\n\n\nPython\n\nFinance\n\nData Visualisation\n\n\n\nExploring trends in financial markets using Python.\n\n\n\nApr 10, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nlala\n\n\n\nPython\n\nFinance\n\nData Visualisation\n\n\n\nlalalal\n\n\n\nApr 10, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "Churn Analysis for Bank Customers\n\n\n\nPython\n\nStatistics\n\nData Visualisation\n\n\n\nUsing Python to analyse customer churn in the banking sector, leveraging statistical methods and data visualisation.\n\n\n\nApr 18, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nBERT vs LLaMA 3: Fake News Detection\n\n\n\nPython\n\nNLP\n\nMachine Learning\n\nDeep Learning\n\n\n\nA comparative study of discriminative and generative AI models for detecting fake news, using fine-tuned BERT and few-shot LLaMA 3.\n\n\n\nApr 17, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nlala\n\n\n\nPython\n\nFinance\n\nData Visualisation\n\n\n\nlalalal\n\n\n\nApr 10, 2026\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/list/project_3/index.html",
@@ -189,17 +189,66 @@
     "text": "Welcome to my portfolio! Here you will find my projects, research, and insights at the intersection of finance and data science.\nLearn more about me →"
   },
   {
-    "objectID": "projects/list/project_1/index.html#data-quality-assessment",
-    "href": "projects/list/project_1/index.html#data-quality-assessment",
-    "title": "Churn Analysis for Bank Customers",
-    "section": "Data Quality Assessment",
-    "text": "Data Quality Assessment\nWhile checking the statistics of the dataset, I noticed that some numerical features had extreme outliers, so I created boxplots to visualise the distribution of these features and identify the outliers that needed to be handled before proceeding with the analysis.\n\n\nCode\n# columns for boxplots\ncols = ['score',\n       'age',\n       'equity',\n       'balance',\n       'salary']\n\n# boxplots for numerical features\nplt.figure(figsize=(8,7))\nfor i, col in enumerate(cols):\n    sns.boxplot(bank_data[col], color=sns.color_palette('Set3')[i+1], ax=plt.subplot(3, 2, i+1))\n    plt.title('Boxplot for {}'.format(col), fontsize=17)\n    plt.xlabel(col)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\nAs expected, the balance sheet and salary data contain many outliers. The “equity” and “age” features also contain outliers, but they are few and small, so we decided to leave them unchanged. To more accurately determine which data to discard, we calculated the 95th, 97.5, and 99th percentiles. After this, we decided to discard balance and salary data at the 95th percentile."
+    "objectID": "projects/list/project_2/index.html#overview",
+    "href": "projects/list/project_2/index.html#overview",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "",
+    "text": "Disinformation has become a defining challenge of the digital age. This project compares two fundamentally different AI approaches to fake news detection: BERT (a discriminative model, fine-tuned on labelled data) and LLaMA 3 (a generative model, using few-shot prompting via Ollama). The goal was to determine which approach is more suitable for deployment in a news organisation’s editorial pipeline.\n View BERT notebook on GitHub  View LLaMA 3 notebook on GitHub"
   },
   {
-    "objectID": "projects/list/project_1/index.html#exploratory-data-analysis",
-    "href": "projects/list/project_1/index.html#exploratory-data-analysis",
-    "title": "Churn Analysis for Bank Customers",
-    "section": "Exploratory Data Analysis",
-    "text": "Exploratory Data Analysis\nThe first step was to understand how each feature relates to customer churn. The two charts below highlight credit score and city distributions, which showed interesting initial patterns.\n\n\nCode\n# Dataset preprocessing\nbank_data['churn'] = bank_data['churn'].astype('int')\nbank_data['gender'] = bank_data['gender'].replace('Ж', 0)\nbank_data['gender'] = bank_data['gender'].replace('М', 1)\n\nb_data = bank_data.query('balance &lt; 2300000 or balance.isna()')\nb_data = b_data.query('salary &lt; 300000')\nbd = pd.get_dummies(b_data)\n\n# churn distribution by score and age\nfig, axes = plt.subplots(1, 2, figsize=(8, 3))\nsns.histplot(data=b_data, x='score', stat='density', palette='Set2',\n             ax=axes[0], hue='churn', multiple='dodge', common_norm=False)\naxes[0].set_title('Churn by Credit Score')\n\nsns.histplot(data=b_data, x='age', stat='density', palette='Set2',\n             ax=axes[1], hue='churn', multiple='dodge', common_norm=False)\naxes[1].set_title('Churn by Age')\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nChurn distribution by credit score and age\n\n\n\n\n\n\n\n\n\n\nNoteClick to see all feature distributions\n\n\n\n\n\n\n\nCode\nplt.figure(figsize=(8, 20))\nfor i, col in enumerate(bd.drop(['churn', 'userid'], axis=1).columns):\n    sns.histplot(data=bd, x=col, stat='density', palette='Set2',\n                 ax=plt.subplot(6, 2, i+1), hue='churn',\n                 multiple='dodge', common_norm=False)\n    plt.title(f'Churn distribution for {col}', fontsize=15)\n    plt.xlabel(col)\n    plt.ylabel('Frequency')\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nChurn distribution across all features\n\n\n\n\n\n\n\nAlso we created a correlation matrix to understand the relationships between features and identify any multicollinearity issues.\n\n\nCode\n# correlation matrix\ncorr = bd.corr()\nplt.figure(figsize=(8,6))\nsns.heatmap(corr, annot=True, fmt='.0%', cmap='vlag');\nplt.title('Correlation Matrix', fontsize=17);\n\n\n\n\n\nCorrelation matrix of features\n\n\n\n\nThe highest correlation—44%—is between credit rating and the number of properties owned. This indicator likely carries significant weight when calculating the rating. We also see an average correlation (36%) between rating and churn, with a high rating corresponding to high churn.\nWe also see an average correlation of 33% between balance and salary. Also, having a credit card has an average negative correlation with churn.\nAfter calculating the correlation matrix, we decided to calculate the phik correlation matrix to better understand the relationships between features, especially since some of them are categorical.\n\n\nCode\nplt.figure(figsize=(8,7))\nplt.subplot(1, 2, 1)\nsns.heatmap(pd.DataFrame(corr['churn']).drop(index='churn').sort_values('churn', ascending=False), \n                 annot=True, fmt='.0%', cmap='YlOrBr', cbar=False);\nplt.title('Features Influencing Churn (Pearson)', fontsize=17);\n\nplt.subplot(1, 2, 2)\nsns.heatmap(pd.DataFrame(phik['churn']).drop(index='churn').sort_values('churn', ascending=False), \n                 annot=True, fmt='.0%', cmap='YlOrBr', cbar=False);\nplt.title('Features Influencing Churn (Phik)', fontsize=17);\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nFeatures influencing churn: Pearson vs Phik correlation"
+    "objectID": "projects/list/project_2/index.html#dataset",
+    "href": "projects/list/project_2/index.html#dataset",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "Dataset",
+    "text": "Dataset\nThe ISOT Fake and Real News Dataset contains 44,919 labelled news articles collected from Reuters (real) and Politifact-flagged sources (fake).\n\n\n\n\n\n\n\n\nFeature\nReal News\nFake News\n\n\n\n\nArticles\n21,417\n23,502\n\n\nSource\nReuters.com\nPolitifact/Wikipedia-flagged\n\n\nTopics\npoliticsNews, worldnews\npolitics, Government News, US_News\n\n\nDate range\n2016–2018\n2015–2018"
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#data-preparation",
+    "href": "projects/list/project_2/index.html#data-preparation",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "Data Preparation",
+    "text": "Data Preparation\n\n\nCode\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay\nimport warnings\nwarnings.filterwarnings('ignore')\n\n# Simulating the dataset summary (original data loaded from CSVs in full notebook)\ndata = {\n    'Category': ['Real', 'Fake'],\n    'Count': [21417, 23502],\n    'Avg Words': [405, 688]\n}\nsummary_df = pd.DataFrame(data)\n\nfig, axes = plt.subplots(1, 2, figsize=(8, 4))\n\naxes[0].bar(summary_df['Category'], summary_df['Count'],\n            color=['steelblue', 'tomato'], edgecolor='white')\naxes[0].set_title('Class Distribution (Full Dataset)')\naxes[0].set_ylabel('Number of Articles')\nfor i, v in enumerate(summary_df['Count']):\n    axes[0].text(i, v + 300, f'{v:,}', ha='center')\n\naxes[1].bar(summary_df['Category'], summary_df['Avg Words'],\n            color=['steelblue', 'tomato'], edgecolor='white')\naxes[1].set_title('Average Word Count per Article')\naxes[1].set_ylabel('Words')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nClass distribution and word count analysis\n\n\n\n\nA balanced subsample of 4,000 articles (2,000 real + 2,000 fake) was used for BERT fine-tuning, split 80/20 into training and test sets. For LLaMA 3, a separate balanced sample of 50 articles was drawn from the held-out test set due to computational constraints of running the model locally on CPU."
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#bert-fine-tuning-approach",
+    "href": "projects/list/project_2/index.html#bert-fine-tuning-approach",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "BERT Fine-Tuning Approach",
+    "text": "BERT Fine-Tuning Approach\nThe pre-trained bert-base-uncased model was fine-tuned using the HuggingFace Transformers library with the following configuration:\n\n\n\nHyperparameter\nValue\n\n\n\n\nLearning rate\n2e-5\n\n\nBatch size (train/eval)\n16 / 32\n\n\nEpochs\n3\n\n\nMax sequence length\n256 tokens\n\n\nWarmup steps\n200\n\n\nMetric for best model\nF1 (macro)\n\n\n\n\n\nCode\n# Simulated training curves based on actual results\nsteps = list(range(0, 600, 50))\ntrain_loss = [0.65, 0.25, 0.08, 0.03, 0.015, 0.01, 0.008, 0.005, 0.004, 0.003, 0.002, 0.002]\nepochs = [1, 2, 3]\nval_loss = [0.029, 0.017, 0.019]\n\nfig, axes = plt.subplots(1, 2, figsize=(8, 4))\naxes[0].plot(steps, train_loss, color='steelblue', linewidth=2)\naxes[0].set_title('Training Loss')\naxes[0].set_xlabel('Steps')\naxes[0].set_ylabel('Loss')\n\naxes[1].plot(epochs, val_loss, marker='o', color='tomato', linewidth=2)\naxes[1].set_title('Validation Loss per Epoch')\naxes[1].set_xlabel('Epoch')\naxes[1].set_ylabel('Loss')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nBERT training and validation loss curves"
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#llama-3-few-shot-approach",
+    "href": "projects/list/project_2/index.html#llama-3-few-shot-approach",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "LLaMA 3 Few-Shot Approach",
+    "text": "LLaMA 3 Few-Shot Approach\nLLaMA 3 was run locally using Ollama — an open-source runtime for large language models. No model weights were updated; instead, a few-shot prompt with three labelled examples was used to guide classification.\n\n\nCode\n# Few-shot prompt template used for LLaMA 3\nprompt_template = \"\"\"\nYou are an expert fact-checker. Classify each news article as REAL or FAKE.\nOnly reply with one word: REAL or FAKE.\n\nExamples:\nArticle: \"WASHINGTON (Reuters) - The U.S. Senate confirmed Rex Tillerson \nas secretary of state by a vote of 56-43.\"\nLabel: REAL\n\nArticle: \"BREAKING: Anonymous sources confirm the deep state is planning \nto overthrow the president using secret FEMA camps.\"\nLabel: FAKE\n\nArticle: \"Scientists ADMIT vaccines cause autism. The mainstream media \nis hiding the TRUTH from you!\"\nLabel: FAKE\n\nNow classify this article:\nArticle: \"{text}\"\nLabel:\n\"\"\"\nprint(prompt_template)\n\n\n\nYou are an expert fact-checker. Classify each news article as REAL or FAKE.\nOnly reply with one word: REAL or FAKE.\n\nExamples:\nArticle: \"WASHINGTON (Reuters) - The U.S. Senate confirmed Rex Tillerson \nas secretary of state by a vote of 56-43.\"\nLabel: REAL\n\nArticle: \"BREAKING: Anonymous sources confirm the deep state is planning \nto overthrow the president using secret FEMA camps.\"\nLabel: FAKE\n\nArticle: \"Scientists ADMIT vaccines cause autism. The mainstream media \nis hiding the TRUTH from you!\"\nLabel: FAKE\n\nNow classify this article:\nArticle: \"{text}\"\nLabel:"
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#results-comparison",
+    "href": "projects/list/project_2/index.html#results-comparison",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "Results Comparison",
+    "text": "Results Comparison\n\n\nCode\nimport plotly.graph_objects as go\n\nmetrics = ['Accuracy', 'Macro Precision', 'Macro Recall', 'Macro F1']\nbert_scores = [99.75, 99.75, 99.75, 99.75]\nllama_scores = [54.00, 76.04, 54.00, 41.65]\n\nfig = go.Figure()\nfig.add_trace(go.Bar(name='BERT (Fine-tuned)', x=metrics, y=bert_scores,\n                     marker_color='steelblue'))\nfig.add_trace(go.Bar(name='LLaMA 3 (Few-shot)', x=metrics, y=llama_scores,\n                     marker_color='tomato'))\n\nfig.update_layout(\n    title='Model Performance Comparison (%)',\n    yaxis_title='Score (%)',\n    barmode='group',\n    plot_bgcolor='rgba(0,0,0,0)',\n    paper_bgcolor='rgba(0,0,0,0)',\n    yaxis=dict(range=[0, 105])\n)\nfig.show()\n\n\n                                                \nHead-to-head performance comparison: BERT vs LLaMA 3\n\n\n\n\nCode\nfig, axes = plt.subplots(1, 2, figsize=(8, 4))\n\n# BERT confusion matrix\nbert_cm = np.array([[400, 0], [2, 398]])\ndisp1 = ConfusionMatrixDisplay(confusion_matrix=bert_cm, display_labels=['Fake', 'Real'])\ndisp1.plot(ax=axes[0], colorbar=False, cmap='Blues')\naxes[0].set_title('BERT (800 articles)')\n\n# LLaMA confusion matrix\nllama_cm = np.array([[2, 23], [0, 25]])\ndisp2 = ConfusionMatrixDisplay(confusion_matrix=llama_cm, display_labels=['Fake', 'Real'])\ndisp2.plot(ax=axes[1], colorbar=False, cmap='Oranges')\naxes[1].set_title('LLaMA 3 (50 articles)')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nConfusion matrices for both models"
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#key-findings",
+    "href": "projects/list/project_2/index.html#key-findings",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "Key Findings",
+    "text": "Key Findings\n\n\n\n\n\n\nTipMain Insights\n\n\n\n\nBERT achieved 99.75% accuracy with perfect recall on fake articles — only 2 out of 800 articles were misclassified\nLLaMA 3 achieved just 54% accuracy (barely above random chance) with a strong bias towards predicting “Real” — 23 out of 25 fake articles were missed\nThe performance gap is not a failure of LLaMA 3 as a model, but a limitation of few-shot prompting versus gradient-based fine-tuning for structured classification tasks\n\n\n\n\n\n\n\n\n\nWarningBusiness Recommendation\n\n\n\nFor deployment in a news organisation’s editorial pipeline, BERT is the clear choice — its 99.75% accuracy translates to roughly 25 misclassifications per 10,000 articles. However, a hybrid architecture combining BERT’s classification reliability with LLaMA 3’s generative explainability could offer the best of both worlds: BERT flags articles, LLaMA 3 explains why."
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#ethical-considerations",
+    "href": "projects/list/project_2/index.html#ethical-considerations",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "Ethical Considerations",
+    "text": "Ethical Considerations\nThis project evaluated both models against the EU AI Act (2024) and Trustworthy AI principles. Key considerations include maintaining human oversight in editorial decisions, addressing dataset bias (the ISOT dataset reflects Western media perspectives), and ensuring transparency in model decision-making. LLaMA 3’s local deployment via Ollama offers a privacy advantage, as no article text leaves the organisation’s infrastructure."
+  },
+  {
+    "objectID": "projects/list/project_2/index.html#methodology",
+    "href": "projects/list/project_2/index.html#methodology",
+    "title": "BERT vs LLaMA 3: Fake News Detection",
+    "section": "Methodology",
+    "text": "Methodology\n\n\n\n\n\nflowchart LR\n    A[ISOT Dataset&lt;br&gt;44,919 articles] --&gt; B[Preprocessing&lt;br&gt;Label assignment&lt;br&gt;Feature construction]\n    B --&gt; C[BERT Pipeline&lt;br&gt;4,000 articles&lt;br&gt;Fine-tuning]\n    B --&gt; D[LLaMA 3 Pipeline&lt;br&gt;50 articles&lt;br&gt;Few-shot prompting]\n    C --&gt; E[Evaluation&lt;br&gt;Accuracy, F1&lt;br&gt;Confusion Matrix]\n    D --&gt; E\n    E --&gt; F[Comparative&lt;br&gt;Analysis]\n\n\n\n\n\n\n\nThis project was completed as part of the MSc in Business Analytics, Advanced Analytics Techniques module at Dublin City University.\n\n\n\n← Previous: Bank Churn Analysis\n\nNext: Project 3 →"
   }
 ]

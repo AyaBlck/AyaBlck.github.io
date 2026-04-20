@@ -1,13 +1,228 @@
 ---
-title: "Financial Data Analysis"
-description: "Exploring trends in financial markets using Python."
+title: "BERT vs LLaMA 3: Fake News Detection"
+description: "A comparative study of discriminative and generative AI models for detecting fake news, using fine-tuned BERT and few-shot LLaMA 3."
 author: "Alina Bolshakova"
-date: 2026-04-10
-image: cover2.jpg
-categories: [Python, Finance, Data Visualisation]
+date: 2026-04-17
+image: project2.png
+categories: [Python, NLP, Machine Learning, Deep Learning]
+code-fold: true
+code-tools: true
 ---
 
-Project content goes here...
+## Overview
+
+Disinformation has become a defining challenge of the digital age. This project compares two fundamentally different AI approaches to fake news detection: **BERT** (a discriminative model, fine-tuned on labelled data) and **LLaMA 3** (a generative model, using few-shot prompting via Ollama). The goal was to determine which approach is more suitable for deployment in a news organisation's editorial pipeline.
+
+{{< fa brands github >}} [View BERT notebook on GitHub](https://github.com/AyaBlck/Python_Projects/blob/main/BERT_Model.ipynb){target=_blank}
+{{< fa brands github >}} [View LLaMA 3 notebook on GitHub](https://github.com/AyaBlck/Python_Projects/blob/main/LLaMA3_Model.ipynb){target=_blank}
+
+## Dataset
+
+The [ISOT Fake and Real News Dataset](https://www.kaggle.com/clmentbisaillon/fake-and-real-news-dataset) contains 44,919 labelled news articles collected from Reuters (real) and Politifact-flagged sources (fake).
+
+| Feature | Real News | Fake News |
+|---------|-----------|-----------|
+| Articles | 21,417 | 23,502 |
+| Source | Reuters.com | Politifact/Wikipedia-flagged |
+| Topics | politicsNews, worldnews | politics, Government News, US_News |
+| Date range | 2016–2018 | 2015–2018 |
+
+## Data Preparation
+
+```{python}
+#| error: true
+#| fig-cap: "Class distribution and word count analysis"
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
+import warnings
+warnings.filterwarnings('ignore')
+
+# Simulating the dataset summary (original data loaded from CSVs in full notebook)
+data = {
+    'Category': ['Real', 'Fake'],
+    'Count': [21417, 23502],
+    'Avg Words': [405, 688]
+}
+summary_df = pd.DataFrame(data)
+
+fig, axes = plt.subplots(1, 2, figsize=(8, 4))
+
+axes[0].bar(summary_df['Category'], summary_df['Count'],
+            color=['steelblue', 'tomato'], edgecolor='white')
+axes[0].set_title('Class Distribution (Full Dataset)')
+axes[0].set_ylabel('Number of Articles')
+for i, v in enumerate(summary_df['Count']):
+    axes[0].text(i, v + 300, f'{v:,}', ha='center')
+
+axes[1].bar(summary_df['Category'], summary_df['Avg Words'],
+            color=['steelblue', 'tomato'], edgecolor='white')
+axes[1].set_title('Average Word Count per Article')
+axes[1].set_ylabel('Words')
+
+plt.tight_layout()
+plt.show()
+```
+
+A balanced subsample of 4,000 articles (2,000 real + 2,000 fake) was used for BERT fine-tuning, split 80/20 into training and test sets. For LLaMA 3, a separate balanced sample of 50 articles was drawn from the held-out test set due to computational constraints of running the model locally on CPU.
+
+## BERT Fine-Tuning Approach
+
+The pre-trained `bert-base-uncased` model was fine-tuned using the HuggingFace Transformers library with the following configuration:
+
+| Hyperparameter | Value |
+|---------------|-------|
+| Learning rate | 2e-5 |
+| Batch size (train/eval) | 16 / 32 |
+| Epochs | 3 |
+| Max sequence length | 256 tokens |
+| Warmup steps | 200 |
+| Metric for best model | F1 (macro) |
+
+```{python}
+#| error: true
+#| fig-cap: "BERT training and validation loss curves"
+
+# Simulated training curves based on actual results
+steps = list(range(0, 600, 50))
+train_loss = [0.65, 0.25, 0.08, 0.03, 0.015, 0.01, 0.008, 0.005, 0.004, 0.003, 0.002, 0.002]
+epochs = [1, 2, 3]
+val_loss = [0.029, 0.017, 0.019]
+
+fig, axes = plt.subplots(1, 2, figsize=(8, 4))
+axes[0].plot(steps, train_loss, color='steelblue', linewidth=2)
+axes[0].set_title('Training Loss')
+axes[0].set_xlabel('Steps')
+axes[0].set_ylabel('Loss')
+
+axes[1].plot(epochs, val_loss, marker='o', color='tomato', linewidth=2)
+axes[1].set_title('Validation Loss per Epoch')
+axes[1].set_xlabel('Epoch')
+axes[1].set_ylabel('Loss')
+
+plt.tight_layout()
+plt.show()
+```
+
+## LLaMA 3 Few-Shot Approach
+
+LLaMA 3 was run locally using **Ollama** — an open-source runtime for large language models. No model weights were updated; instead, a few-shot prompt with three labelled examples was used to guide classification.
+
+```{python}
+#| error: true
+
+# Few-shot prompt template used for LLaMA 3
+prompt_template = """
+You are an expert fact-checker. Classify each news article as REAL or FAKE.
+Only reply with one word: REAL or FAKE.
+
+Examples:
+Article: "WASHINGTON (Reuters) - The U.S. Senate confirmed Rex Tillerson 
+as secretary of state by a vote of 56-43."
+Label: REAL
+
+Article: "BREAKING: Anonymous sources confirm the deep state is planning 
+to overthrow the president using secret FEMA camps."
+Label: FAKE
+
+Article: "Scientists ADMIT vaccines cause autism. The mainstream media 
+is hiding the TRUTH from you!"
+Label: FAKE
+
+Now classify this article:
+Article: "{text}"
+Label:
+"""
+print(prompt_template)
+```
+
+## Results Comparison
+
+```{python}
+#| error: true
+#| fig-cap: "Head-to-head performance comparison: BERT vs LLaMA 3"
+
+import plotly.graph_objects as go
+
+metrics = ['Accuracy', 'Macro Precision', 'Macro Recall', 'Macro F1']
+bert_scores = [99.75, 99.75, 99.75, 99.75]
+llama_scores = [54.00, 76.04, 54.00, 41.65]
+
+fig = go.Figure()
+fig.add_trace(go.Bar(name='BERT (Fine-tuned)', x=metrics, y=bert_scores,
+                     marker_color='steelblue'))
+fig.add_trace(go.Bar(name='LLaMA 3 (Few-shot)', x=metrics, y=llama_scores,
+                     marker_color='tomato'))
+
+fig.update_layout(
+    title='Model Performance Comparison (%)',
+    yaxis_title='Score (%)',
+    barmode='group',
+    plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)',
+    yaxis=dict(range=[0, 105])
+)
+fig.show()
+```
+
+```{python}
+#| error: true
+#| fig-cap: "Confusion matrices for both models"
+
+fig, axes = plt.subplots(1, 2, figsize=(8, 4))
+
+# BERT confusion matrix
+bert_cm = np.array([[400, 0], [2, 398]])
+disp1 = ConfusionMatrixDisplay(confusion_matrix=bert_cm, display_labels=['Fake', 'Real'])
+disp1.plot(ax=axes[0], colorbar=False, cmap='Blues')
+axes[0].set_title('BERT (800 articles)')
+
+# LLaMA confusion matrix
+llama_cm = np.array([[2, 23], [0, 25]])
+disp2 = ConfusionMatrixDisplay(confusion_matrix=llama_cm, display_labels=['Fake', 'Real'])
+disp2.plot(ax=axes[1], colorbar=False, cmap='Oranges')
+axes[1].set_title('LLaMA 3 (50 articles)')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Key Findings
+
+::: {.callout-tip}
+## Main Insights
+- **BERT** achieved 99.75% accuracy with perfect recall on fake articles — only 2 out of 800 articles were misclassified
+- **LLaMA 3** achieved just 54% accuracy (barely above random chance) with a strong bias towards predicting "Real" — 23 out of 25 fake articles were missed
+- The performance gap is not a failure of LLaMA 3 as a model, but a limitation of **few-shot prompting** versus **gradient-based fine-tuning** for structured classification tasks
+:::
+
+::: {.callout-warning}
+## Business Recommendation
+For deployment in a news organisation's editorial pipeline, **BERT is the clear choice** — its 99.75% accuracy translates to roughly 25 misclassifications per 10,000 articles. However, a **hybrid architecture** combining BERT's classification reliability with LLaMA 3's generative explainability could offer the best of both worlds: BERT flags articles, LLaMA 3 explains why.
+:::
+
+## Ethical Considerations
+
+This project evaluated both models against the EU AI Act (2024) and Trustworthy AI principles. Key considerations include maintaining human oversight in editorial decisions, addressing dataset bias (the ISOT dataset reflects Western media perspectives), and ensuring transparency in model decision-making. LLaMA 3's local deployment via Ollama offers a privacy advantage, as no article text leaves the organisation's infrastructure.
+
+## Methodology
+
+```{mermaid}
+flowchart LR
+    A[ISOT Dataset<br>44,919 articles] --> B[Preprocessing<br>Label assignment<br>Feature construction]
+    B --> C[BERT Pipeline<br>4,000 articles<br>Fine-tuning]
+    B --> D[LLaMA 3 Pipeline<br>50 articles<br>Few-shot prompting]
+    C --> E[Evaluation<br>Accuracy, F1<br>Confusion Matrix]
+    D --> E
+    E --> F[Comparative<br>Analysis]
+```
+
+---
+
+*This project was completed as part of the MSc in Business Analytics, Advanced Analytics Techniques module at Dublin City University.*
 
 ---
 
