@@ -224,6 +224,8 @@ flowchart LR
 
 *This project was completed as part of the MSc in Business Analytics, Advanced Analytics Techniques module at Dublin City University.*
 
+*Due to computational restraints, visualisations on this page are recreated manually.*
+
 ---
 
 :::: {.columns}
@@ -231,6 +233,6 @@ flowchart LR
 [← Previous: Bank Churn Analysis](../project_1/index.qmd)
 :::
 ::: {.column width="50%" style="text-align: right;"}
-[Next: Project 3 →](../project_3/index.qmd)
+[Next: Fraud Detection Using Statistics and Machine Learning →](../project_3/index.qmd)
 :::
 ::::
