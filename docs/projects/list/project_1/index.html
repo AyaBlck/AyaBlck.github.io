@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alina Bolshakova">
-<meta name="dcterms.date" content="2026-04-10">
-<meta name="description" content="Using Python to predict customer churn in the banking sector, leveraging machine learning techniques and data visualisation.">
+<meta name="dcterms.date" content="2026-04-18">
+<meta name="description" content="Using Python to analyse customer churn in the banking sector, leveraging statistical methods and data visualisation.">
 
 <title>Churn Analysis for Bank Customers – Alina Bolshakova</title>
 <style>
@@ -353,9 +353,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#data-loading-exploration" id="toc-data-loading-exploration" class="nav-link" data-scroll-target="#data-loading-exploration">Data Loading &amp; Exploration</a></li>
-  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a></li>
+  <li><a href="#data-quality-assessment" id="toc-data-quality-assessment" class="nav-link" data-scroll-target="#data-quality-assessment">Data Quality Assessment</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory Data Analysis</a></li>
   <li><a href="#key-findings" id="toc-key-findings" class="nav-link" data-scroll-target="#key-findings">Key Findings</a></li>
-  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
   </ul>
 </nav>
@@ -369,14 +369,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-block"><div><h1 class="title">Churn Analysis for Bank Customers</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
   <div class="quarto-categories">
     <div class="quarto-category">Python</div>
-    <div class="quarto-category">Machine Learning</div>
+    <div class="quarto-category">Statistics</div>
     <div class="quarto-category">Data Visualisation</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Using Python to predict customer churn in the banking sector, leveraging machine learning techniques and data visualisation.
+    Using Python to analyse customer churn in the banking sector, leveraging statistical methods and data visualisation.
   </div>
 </div>
 
@@ -393,7 +393,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 10, 2026</p>
+      <p class="date">April 18, 2026</p>
     </div>
   </div>
   
@@ -407,12 +407,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This project analyses customer churn in the banking sector — identifying key factors that influence whether a customer leaves their bank. Using machine learning models, we predict churn risk and provide actionable insights for customer retention.</p>
+<p>This project analyses customer churn in the banking sector — identifying key factors that influence whether a customer leaves their bank.</p>
 <p><i class="fa-brands fa-github" aria-label="github"></i> <a href="https://github.com/AyaBlck/Python_Projects/blob/main/bank_churn.ipynb" target="_blank">View full notebook on GitHub</a></p>
 </section>
 <section id="data-loading-exploration" class="level2">
 <h2 class="anchored" data-anchor-id="data-loading-exploration">Data Loading &amp; Exploration</h2>
-<div id="b353fc77" class="cell" data-execution_count="1">
+<div id="29ab2ee9" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -426,7 +426,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>bank_data <span class="op">=</span> pd.read_csv(<span class="st">"bank_new_dataset.csv"</span>)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>bank_data.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
 
@@ -531,116 +531,157 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="data-cleaning" class="level2">
-<h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
-<div id="777da72e" class="cell" data-execution_count="2">
+<section id="data-quality-assessment" class="level2">
+<h2 class="anchored" data-anchor-id="data-quality-assessment">Data Quality Assessment</h2>
+<p>While checking the statistics of the dataset, I noticed that some numerical features had extreme outliers, so I created boxplots to visualise the distribution of these features and identify the outliers that needed to be handled before proceeding with the analysis.</p>
+<div id="64ed266c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>b_data <span class="op">=</span> bank_data[(bank_data[<span class="st">'balance'</span>] <span class="op">&lt;</span> <span class="dv">2300000</span>) <span class="op">|</span> (bank_data[<span class="st">'balance'</span>].isna())]</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>b_data <span class="op">=</span> b_data[b_data[<span class="st">'salary'</span>] <span class="op">&lt;</span> <span class="dv">300000</span>]</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>b_data.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># columns for boxplots</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [<span class="st">'score'</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       <span class="st">'age'</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>       <span class="st">'equity'</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>       <span class="st">'balance'</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>       <span class="st">'salary'</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplots for numerical features</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">7</span>))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>(cols):</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    sns.boxplot(bank_data[col], color<span class="op">=</span>sns.color_palette(<span class="st">'Set3'</span>)[i<span class="op">+</span><span class="dv">1</span>], ax<span class="op">=</span>plt.subplot(<span class="dv">3</span>, <span class="dv">2</span>, i<span class="op">+</span><span class="dv">1</span>))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Boxplot for </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(col), fontsize<span class="op">=</span><span class="dv">17</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(col)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display">
 <div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">userid</th>
-<th data-quarto-table-cell-role="th">score</th>
-<th data-quarto-table-cell-role="th">city</th>
-<th data-quarto-table-cell-role="th">gender</th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">equity</th>
-<th data-quarto-table-cell-role="th">balance</th>
-<th data-quarto-table-cell-role="th">products</th>
-<th data-quarto-table-cell-role="th">credit_card</th>
-<th data-quarto-table-cell-role="th">last_activity</th>
-<th data-quarto-table-cell-role="th">salary</th>
-<th data-quarto-table-cell-role="th">churn</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>258835</td>
-<td>838.0</td>
-<td>Ростов</td>
-<td>Ж</td>
-<td>32</td>
-<td>1</td>
-<td>377652.29</td>
-<td>2</td>
-<td>0</td>
-<td>1</td>
-<td>105665.06</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>96660</td>
-<td>845.0</td>
-<td>Ростов</td>
-<td>Ж</td>
-<td>31</td>
-<td>3</td>
-<td>214980.98</td>
-<td>5</td>
-<td>0</td>
-<td>1</td>
-<td>62058.62</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>99838</td>
-<td>869.0</td>
-<td>Ростов</td>
-<td>Ж</td>
-<td>30</td>
-<td>4</td>
-<td>467040.46</td>
-<td>2</td>
-<td>1</td>
-<td>1</td>
-<td>156945.23</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>216099</td>
-<td>856.0</td>
-<td>Рыбинск</td>
-<td>Ж</td>
-<td>25</td>
-<td>4</td>
-<td>475727.88</td>
-<td>4</td>
-<td>0</td>
-<td>1</td>
-<td>19502.68</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">4</th>
-<td>120240</td>
-<td>873.0</td>
-<td>Рыбинск</td>
-<td>Ж</td>
-<td>37</td>
-<td>3</td>
-<td>1350858.40</td>
-<td>4</td>
-<td>0</td>
-<td>1</td>
-<td>119804.41</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-3-output-1.png" width="759" height="663" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As expected, the balance sheet and salary data contain many outliers. The “equity” and “age” features also contain outliers, but they are few and small, so we decided to leave them unchanged. To more accurately determine which data to discard, we calculated the 95th, 97.5, and 99th percentiles. After this, we decided to discard balance and salary data at the 95th percentile.</p>
+</section>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+<p>The first step was to understand how each feature relates to customer churn. The two charts below highlight credit score and city distributions, which showed interesting initial patterns.</p>
+<div id="1fee571c" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset preprocessing</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>bank_data[<span class="st">'churn'</span>] <span class="op">=</span> bank_data[<span class="st">'churn'</span>].astype(<span class="st">'int'</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>bank_data[<span class="st">'gender'</span>] <span class="op">=</span> bank_data[<span class="st">'gender'</span>].replace(<span class="st">'Ж'</span>, <span class="dv">0</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>bank_data[<span class="st">'gender'</span>] <span class="op">=</span> bank_data[<span class="st">'gender'</span>].replace(<span class="st">'М'</span>, <span class="dv">1</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>b_data <span class="op">=</span> bank_data.query(<span class="st">'balance &lt; 2300000 or balance.isna()'</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>b_data <span class="op">=</span> b_data.query(<span class="st">'salary &lt; 300000'</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>bd <span class="op">=</span> pd.get_dummies(b_data)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># churn distribution by score and age</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>b_data, x<span class="op">=</span><span class="st">'score'</span>, stat<span class="op">=</span><span class="st">'density'</span>, palette<span class="op">=</span><span class="st">'Set2'</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>             ax<span class="op">=</span>axes[<span class="dv">0</span>], hue<span class="op">=</span><span class="st">'churn'</span>, multiple<span class="op">=</span><span class="st">'dodge'</span>, common_norm<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Churn by Credit Score'</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>b_data, x<span class="op">=</span><span class="st">'age'</span>, stat<span class="op">=</span><span class="st">'density'</span>, palette<span class="op">=</span><span class="st">'Set2'</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>             ax<span class="op">=</span>axes[<span class="dv">1</span>], hue<span class="op">=</span><span class="st">'churn'</span>, multiple<span class="op">=</span><span class="st">'dodge'</span>, common_norm<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Churn by Age'</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-4-output-1.png" width="758" height="278" class="figure-img"></p>
+<figcaption>Churn distribution by credit score and age</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Click to see all feature distributions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="8f9db637" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">20</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>(bd.drop([<span class="st">'churn'</span>, <span class="st">'userid'</span>], axis<span class="op">=</span><span class="dv">1</span>).columns):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    sns.histplot(data<span class="op">=</span>bd, x<span class="op">=</span>col, stat<span class="op">=</span><span class="st">'density'</span>, palette<span class="op">=</span><span class="st">'Set2'</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                 ax<span class="op">=</span>plt.subplot(<span class="dv">6</span>, <span class="dv">2</span>, i<span class="op">+</span><span class="dv">1</span>), hue<span class="op">=</span><span class="st">'churn'</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                 multiple<span class="op">=</span><span class="st">'dodge'</span>, common_norm<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'Churn distribution for </span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">'</span>, fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(col)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-5-output-1.png" width="772" height="1909" class="figure-img"></p>
+<figcaption>Churn distribution across all features</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Also we created a correlation matrix to understand the relationships between features and identify any multicollinearity issues.</p>
+<div id="4d5f9875" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># correlation matrix</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> bd.corr()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>sns.heatmap(corr, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">'.0%'</span>, cmap<span class="op">=</span><span class="st">'vlag'</span>)<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Correlation Matrix'</span>, fontsize<span class="op">=</span><span class="dv">17</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-6-output-1.png" width="688" height="591" class="figure-img"></p>
+<figcaption>Correlation matrix of features</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The highest correlation—44%—is between credit rating and the number of properties owned. This indicator likely carries significant weight when calculating the rating. We also see an average correlation (36%) between rating and churn, with a high rating corresponding to high churn.</p>
+<p>We also see an average correlation of 33% between balance and salary. Also, having a credit card has an average negative correlation with churn.</p>
+<p>After calculating the correlation matrix, we decided to calculate the phik correlation matrix to better understand the relationships between features, especially since some of them are categorical.</p>
+<div id="4af1379a" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">7</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(pd.DataFrame(corr[<span class="st">'churn'</span>]).drop(index<span class="op">=</span><span class="st">'churn'</span>).sort_values(<span class="st">'churn'</span>, ascending<span class="op">=</span><span class="va">False</span>), </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                 annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">'.0%'</span>, cmap<span class="op">=</span><span class="st">'YlOrBr'</span>, cbar<span class="op">=</span><span class="va">False</span>)<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Features Influencing Churn (Pearson)'</span>, fontsize<span class="op">=</span><span class="dv">17</span>)<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>sns.heatmap(pd.DataFrame(phik[<span class="st">'churn'</span>]).drop(index<span class="op">=</span><span class="st">'churn'</span>).sort_values(<span class="st">'churn'</span>, ascending<span class="op">=</span><span class="va">False</span>), </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                 annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">'.0%'</span>, cmap<span class="op">=</span><span class="st">'YlOrBr'</span>, cbar<span class="op">=</span><span class="va">False</span>)<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Features Influencing Churn (Phik)'</span>, fontsize<span class="op">=</span><span class="dv">17</span>)<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-8-output-1.png" width="799" height="663" class="figure-img"></p>
+<figcaption>Features influencing churn: Pearson vs Phik correlation</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -658,30 +699,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Older customers with higher balances were more likely to churn</li>
-<li>Credit score alone was not a strong predictor of churn</li>
-<li>Tenure played a significant role in customer retention</li>
+<li><strong>Credit score</strong> is the strongest churn driver — as scores increase, so does the churn rate</li>
+<li><strong>Number of products</strong> reveals a clear pattern: customers with 1 product have only 10% churn, those with 2 products almost never leave, but customers with 3-4 products churn almost entirely</li>
+<li><strong>Age</strong> shows increasing churn from age 20 to 40, a small spike at 55, and almost no churn after 60</li>
+<li><strong>Recent activity</strong> correlates with churn — likely because customers transfer funds before closing accounts</li>
+<li><strong>Income and balance</strong> — customers with fewer funds are less likely to churn, while those earning above 45,000 show higher churn rates</li>
 </ul>
 </div>
 </div>
 </section>
-<section id="methodology" class="level2">
-<h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
-<p>The analysis followed these steps:</p>
-<ol type="1">
-<li>Data cleaning and preprocessing</li>
-<li>Exploratory data analysis with interactive visualisations</li>
-<li>Feature engineering</li>
-<li>Model training and evaluation</li>
-</ol>
-<blockquote class="blockquote">
-<p>“The goal is not just to predict churn, but to understand <em>why</em> customers leave.”</p>
-</blockquote>
-</section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>The analysis revealed several actionable patterns for the bank’s marketing department.</p>
+<p>The bank successfully attracts credit and salary-transfer customers, but struggles to retain clients with other products. Customers with 3-4 products are almost entirely churned, suggesting that beyond credit services, the bank’s product offerings may not meet customer expectations.</p>
+<blockquote class="blockquote">
+<p>The data suggests a critical gap: the bank lacks a compelling product for higher-income customers — the “upper middle class” segment earning above the regional average salary.</p>
+</blockquote>
+<p>The relationship between recent activity and churn is particularly interesting. Customers who were recently active are more likely to leave, which makes sense — before closing an account, customers typically transfer their funds to other banks. This activity spike could serve as an early warning signal for the retention team.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Recommendation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The bank should focus on developing premium products for customers with higher incomes (above 45,000) and consider personalised retention strategies for customers aged 30-45, who represent the highest churn risk segment.</p>
+</div>
+</div>
 <hr>
-<p><em>This project demonstrates the application of data science techniques to solve real-world business problems in the financial sector.</em></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+
+</div><div class="column" style="text-align: right;">
+<p><a href="../../../projects/list/project_2/index.html">Next: Financial Data Analysis →</a></p>
+</div>
+</div>
 
 
 <!-- -->
@@ -1153,75 +1208,196 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Churn Analysis for Bank Customers"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Using Python to predict customer churn in the banking sector, leveraging machine learning techniques and data visualisation."</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Alina Bolshakova"</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-04-10</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> /images/project_1.png</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [Python, Machine Learning, Data Visualisation]</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> true</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>This project analyses customer churn in the banking sector — identifying key factors that influence whether a customer leaves their bank. Using machine learning models, we predict churn risk and provide actionable insights for customer retention.</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>{{&lt; fa brands github &gt;}} <span class="co">[</span><span class="ot">View full notebook on GitHub</span><span class="co">](https://github.com/AyaBlck/Python_Projects/blob/main/bank_churn.ipynb)</span>{target=_blank}</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Loading &amp; Exploration</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">'whitegrid'</span>)</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>bank_data <span class="op">=</span> pd.read_csv(<span class="st">"bank_new_dataset.csv"</span>)</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>bank_data.head()</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Cleaning</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>b_data <span class="op">=</span> bank_data[(bank_data[<span class="st">'balance'</span>] <span class="op">&lt;</span> <span class="dv">2300000</span>) <span class="op">|</span> (bank_data[<span class="st">'balance'</span>].isna())]</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>b_data <span class="op">=</span> b_data[b_data[<span class="st">'salary'</span>] <span class="op">&lt;</span> <span class="dv">300000</span>]</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>b_data.head()</span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Key Findings</span></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Main Insights</span></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Older customers with higher balances were more likely to churn</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Credit score alone was not a strong predictor of churn</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tenure played a significant role in customer retention</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methodology</span></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>The analysis followed these steps:</span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Data cleaning and preprocessing</span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Exploratory data analysis with interactive visualisations</span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Feature engineering</span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Model training and evaluation</span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "The goal is not just to predict churn, but to understand *why* customers leave."</span></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>*This project demonstrates the application of data science techniques to solve real-world business problems in the financial sector.*</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Churn Analysis for Bank Customers"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Using Python to analyse customer churn in the banking sector, leveraging statistical methods and data visualisation."</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Alina Bolshakova"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-04-18</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> /images/project_1.png</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [Python, Statistics, Data Visualisation]</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> true</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>This project analyses customer churn in the banking sector — identifying key factors that influence whether a customer leaves their bank. </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>{{&lt; fa brands github &gt;}} <span class="co">[</span><span class="ot">View full notebook on GitHub</span><span class="co">](https://github.com/AyaBlck/Python_Projects/blob/main/bank_churn.ipynb)</span>{target=_blank}</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Loading &amp; Exploration</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">'whitegrid'</span>)</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>bank_data <span class="op">=</span> pd.read_csv(<span class="st">"bank_new_dataset.csv"</span>)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>bank_data.head()</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Quality Assessment</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>While checking the statistics of the dataset, I noticed that some numerical features had extreme outliers, so I created boxplots to visualise the distribution of these features and identify the outliers that needed to be handled before proceeding with the analysis.</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="co"># columns for boxplots</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [<span class="st">'score'</span>,</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>       <span class="st">'age'</span>,</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>       <span class="st">'equity'</span>,</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>       <span class="st">'balance'</span>,</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>       <span class="st">'salary'</span>]</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplots for numerical features</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">7</span>))</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>(cols):</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>    sns.boxplot(bank_data[col], color<span class="op">=</span>sns.color_palette(<span class="st">'Set3'</span>)[i<span class="op">+</span><span class="dv">1</span>], ax<span class="op">=</span>plt.subplot(<span class="dv">3</span>, <span class="dv">2</span>, i<span class="op">+</span><span class="dv">1</span>))</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Boxplot for </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(col), fontsize<span class="op">=</span><span class="dv">17</span>)</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(col)</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>As expected, the balance sheet and salary data contain many outliers. The "equity" and "age" features also contain outliers, but they are few and small, so we decided to leave them unchanged.</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>To more accurately determine which data to discard, we calculated the 95th, 97.5, and 99th percentiles. After this, we decided to discard balance and salary data at the 95th percentile.</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exploratory Data Analysis</span></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>The first step was to understand how each feature relates to customer churn. The two charts below highlight credit score and city distributions, which showed interesting initial patterns.</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Churn distribution by credit score and age"</span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset preprocessing</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>bank_data[<span class="st">'churn'</span>] <span class="op">=</span> bank_data[<span class="st">'churn'</span>].astype(<span class="st">'int'</span>)</span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>bank_data[<span class="st">'gender'</span>] <span class="op">=</span> bank_data[<span class="st">'gender'</span>].replace(<span class="st">'Ж'</span>, <span class="dv">0</span>)</span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>bank_data[<span class="st">'gender'</span>] <span class="op">=</span> bank_data[<span class="st">'gender'</span>].replace(<span class="st">'М'</span>, <span class="dv">1</span>)</span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>b_data <span class="op">=</span> bank_data.query(<span class="st">'balance &lt; 2300000 or balance.isna()'</span>)</span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>b_data <span class="op">=</span> b_data.query(<span class="st">'salary &lt; 300000'</span>)</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>bd <span class="op">=</span> pd.get_dummies(b_data)</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="co"># churn distribution by score and age</span></span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>b_data, x<span class="op">=</span><span class="st">'score'</span>, stat<span class="op">=</span><span class="st">'density'</span>, palette<span class="op">=</span><span class="st">'Set2'</span>,</span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>             ax<span class="op">=</span>axes[<span class="dv">0</span>], hue<span class="op">=</span><span class="st">'churn'</span>, multiple<span class="op">=</span><span class="st">'dodge'</span>, common_norm<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Churn by Credit Score'</span>)</span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>b_data, x<span class="op">=</span><span class="st">'age'</span>, stat<span class="op">=</span><span class="st">'density'</span>, palette<span class="op">=</span><span class="st">'Set2'</span>,</span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>             ax<span class="op">=</span>axes[<span class="dv">1</span>], hue<span class="op">=</span><span class="st">'churn'</span>, multiple<span class="op">=</span><span class="st">'dodge'</span>, common_norm<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Churn by Age'</span>)</span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## Click to see all feature distributions</span></span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Churn distribution across all features"</span></span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">20</span>))</span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>(bd.drop([<span class="st">'churn'</span>, <span class="st">'userid'</span>], axis<span class="op">=</span><span class="dv">1</span>).columns):</span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>    sns.histplot(data<span class="op">=</span>bd, x<span class="op">=</span>col, stat<span class="op">=</span><span class="st">'density'</span>, palette<span class="op">=</span><span class="st">'Set2'</span>,</span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>                 ax<span class="op">=</span>plt.subplot(<span class="dv">6</span>, <span class="dv">2</span>, i<span class="op">+</span><span class="dv">1</span>), hue<span class="op">=</span><span class="st">'churn'</span>,</span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>                 multiple<span class="op">=</span><span class="st">'dodge'</span>, common_norm<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'Churn distribution for </span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">'</span>, fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(col)</span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>Also we created a correlation matrix to understand the relationships between features and identify any multicollinearity issues.</span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Correlation matrix of features"</span></span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a><span class="co"># correlation matrix</span></span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> bd.corr()</span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a>sns.heatmap(corr, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">'.0%'</span>, cmap<span class="op">=</span><span class="st">'vlag'</span>)<span class="op">;</span></span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Correlation Matrix'</span>, fontsize<span class="op">=</span><span class="dv">17</span>)<span class="op">;</span></span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>The highest correlation—44%—is between credit rating and the number of properties owned. This indicator likely carries significant weight when calculating the rating. We also see an average correlation (36%) between rating and churn, with a high rating corresponding to high churn.</span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a>We also see an average correlation of 33% between balance and salary. Also, having a credit card has an average negative correlation with churn.</span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a>After calculating the correlation matrix, we decided to calculate the phik correlation matrix to better understand the relationships between features, especially since some of them are categorical.</span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: false</span></span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> phik</span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a>phik <span class="op">=</span> bd.phik_matrix()</span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Features influencing churn: Pearson vs Phik correlation"</span></span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">7</span>))</span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a>sns.heatmap(pd.DataFrame(corr[<span class="st">'churn'</span>]).drop(index<span class="op">=</span><span class="st">'churn'</span>).sort_values(<span class="st">'churn'</span>, ascending<span class="op">=</span><span class="va">False</span>), </span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a>                 annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">'.0%'</span>, cmap<span class="op">=</span><span class="st">'YlOrBr'</span>, cbar<span class="op">=</span><span class="va">False</span>)<span class="op">;</span></span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Features Influencing Churn (Pearson)'</span>, fontsize<span class="op">=</span><span class="dv">17</span>)<span class="op">;</span></span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a>sns.heatmap(pd.DataFrame(phik[<span class="st">'churn'</span>]).drop(index<span class="op">=</span><span class="st">'churn'</span>).sort_values(<span class="st">'churn'</span>, ascending<span class="op">=</span><span class="va">False</span>), </span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a>                 annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">'.0%'</span>, cmap<span class="op">=</span><span class="st">'YlOrBr'</span>, cbar<span class="op">=</span><span class="va">False</span>)<span class="op">;</span></span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Features Influencing Churn (Phik)'</span>, fontsize<span class="op">=</span><span class="dv">17</span>)<span class="op">;</span></span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a><span class="fu">## Key Findings</span></span>
+<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a><span class="fu">## Main Insights</span></span>
+<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Credit score** is the strongest churn driver — as scores increase, so does the churn rate</span>
+<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Number of products** reveals a clear pattern: customers with 1 product have only 10% churn, those with 2 products almost never leave, but customers with 3-4 products churn almost entirely</span>
+<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Age** shows increasing churn from age 20 to 40, a small spike at 55, and almost no churn after 60</span>
+<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Recent activity** correlates with churn — likely because customers transfer funds before closing accounts</span>
+<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Income and balance** — customers with fewer funds are less likely to churn, while those earning above 45,000 show higher churn rates</span>
+<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
+<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a>The analysis revealed several actionable patterns for the bank's marketing department.</span>
+<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a>The bank successfully attracts credit and salary-transfer customers, but struggles to retain clients with other products. Customers with 3-4 products are almost entirely churned, suggesting that beyond credit services, the bank's product offerings may not meet customer expectations.</span>
+<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The data suggests a critical gap: the bank lacks a compelling product for higher-income customers — the "upper middle class" segment earning above the regional average salary.</span></span>
+<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a>The relationship between recent activity and churn is particularly interesting. Customers who were recently active are more likely to leave, which makes sense — before closing an account, customers typically transfer their funds to other banks. This activity spike could serve as an early warning signal for the retention team.</span>
+<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a><span class="fu">## Recommendation</span></span>
+<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a>The bank should focus on developing premium products for customers with higher incomes (above 45,000) and consider personalised retention strategies for customers aged 30-45, who represent the highest churn risk segment.</span>
+<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%"}</span>
+<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%" style="text-align: right;"}</span>
+<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next: Financial Data Analysis →</span><span class="co">](../project_2/index.qmd)</span></span>
+<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a>::::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

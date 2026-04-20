@@ -8,3 +8,13 @@ categories: [Python, Finance, Data Visualisation]
 ---
 
 Project content goes here...
+
+---
+
+:::: {.columns}
+::: {.column width="50%"}
+[← Previous: Financial Data Analysis](../project_2/index.qmd)
+:::
+::: {.column width="50%" style="text-align: right;"}
+:::
+::::

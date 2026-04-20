@@ -8,3 +8,14 @@ categories: [Python, Finance, Data Visualisation]
 ---
 
 Project content goes here...
+
+---
+
+:::: {.columns}
+::: {.column width="50%"}
+[← Previous: Bank Churn Analysis](../project_1/index.qmd)
+:::
+::: {.column width="50%" style="text-align: right;"}
+[Next: Project 3 →](../project_3/index.qmd)
+:::
+::::

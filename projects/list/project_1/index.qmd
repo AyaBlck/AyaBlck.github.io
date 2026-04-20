@@ -1,17 +1,17 @@
 ---
 title: "Churn Analysis for Bank Customers"
-description: "Using Python to predict customer churn in the banking sector, leveraging machine learning techniques and data visualisation."
+description: "Using Python to analyse customer churn in the banking sector, leveraging statistical methods and data visualisation."
 author: "Alina Bolshakova"
-date: 2026-04-10
+date: 2026-04-18
 image: /images/project_1.png
-categories: [Python, Machine Learning, Data Visualisation]
+categories: [Python, Statistics, Data Visualisation]
 code-fold: true
 code-tools: true
 ---
 
 ## Overview
 
-This project analyses customer churn in the banking sector — identifying key factors that influence whether a customer leaves their bank. Using machine learning models, we predict churn risk and provide actionable insights for customer retention.
+This project analyses customer churn in the banking sector — identifying key factors that influence whether a customer leaves their bank. 
 
 {{< fa brands github >}} [View full notebook on GitHub](https://github.com/AyaBlck/Python_Projects/blob/main/bank_churn.ipynb){target=_blank}
 
@@ -32,38 +32,159 @@ bank_data = pd.read_csv("bank_new_dataset.csv")
 bank_data.head()
 ```
 
-## Data Cleaning
+
+## Data Quality Assessment
+
+While checking the statistics of the dataset, I noticed that some numerical features had extreme outliers, so I created boxplots to visualise the distribution of these features and identify the outliers that needed to be handled before proceeding with the analysis.
 
 ```{python}
 #| error: true
 
-b_data = bank_data[(bank_data['balance'] < 2300000) | (bank_data['balance'].isna())]
-b_data = b_data[b_data['salary'] < 300000]
-b_data.head()
+# columns for boxplots
+cols = ['score',
+       'age',
+       'equity',
+       'balance',
+       'salary']
+
+# boxplots for numerical features
+plt.figure(figsize=(8,7))
+for i, col in enumerate(cols):
+    sns.boxplot(bank_data[col], color=sns.color_palette('Set3')[i+1], ax=plt.subplot(3, 2, i+1))
+    plt.title('Boxplot for {}'.format(col), fontsize=17)
+    plt.xlabel(col)
+plt.tight_layout()
+plt.show()
+```
+
+As expected, the balance sheet and salary data contain many outliers. The "equity" and "age" features also contain outliers, but they are few and small, so we decided to leave them unchanged.
+To more accurately determine which data to discard, we calculated the 95th, 97.5, and 99th percentiles. After this, we decided to discard balance and salary data at the 95th percentile.
+
+## Exploratory Data Analysis
+
+The first step was to understand how each feature relates to customer churn. The two charts below highlight credit score and city distributions, which showed interesting initial patterns.
+```{python}
+#| error: true
+#| fig-cap: "Churn distribution by credit score and age"
+
+# Dataset preprocessing
+bank_data['churn'] = bank_data['churn'].astype('int')
+bank_data['gender'] = bank_data['gender'].replace('Ж', 0)
+bank_data['gender'] = bank_data['gender'].replace('М', 1)
+
+b_data = bank_data.query('balance < 2300000 or balance.isna()')
+b_data = b_data.query('salary < 300000')
+bd = pd.get_dummies(b_data)
+
+# churn distribution by score and age
+fig, axes = plt.subplots(1, 2, figsize=(8, 3))
+sns.histplot(data=b_data, x='score', stat='density', palette='Set2',
+             ax=axes[0], hue='churn', multiple='dodge', common_norm=False)
+axes[0].set_title('Churn by Credit Score')
+
+sns.histplot(data=b_data, x='age', stat='density', palette='Set2',
+             ax=axes[1], hue='churn', multiple='dodge', common_norm=False)
+axes[1].set_title('Churn by Age')
+plt.tight_layout()
+plt.show()
+```
+
+::: {.callout-note collapse="true"}
+## Click to see all feature distributions
+
+```{python}
+#| error: true
+#| fig-cap: "Churn distribution across all features"
+
+plt.figure(figsize=(8, 20))
+for i, col in enumerate(bd.drop(['churn', 'userid'], axis=1).columns):
+    sns.histplot(data=bd, x=col, stat='density', palette='Set2',
+                 ax=plt.subplot(6, 2, i+1), hue='churn',
+                 multiple='dodge', common_norm=False)
+    plt.title(f'Churn distribution for {col}', fontsize=15)
+    plt.xlabel(col)
+    plt.ylabel('Frequency')
+plt.tight_layout()
+plt.show()
+```
+:::
+Also we created a correlation matrix to understand the relationships between features and identify any multicollinearity issues.
+
+```{python}
+#| error: true
+#| fig-cap: "Correlation matrix of features"
+# correlation matrix
+corr = bd.corr()
+plt.figure(figsize=(8,6))
+sns.heatmap(corr, annot=True, fmt='.0%', cmap='vlag');
+plt.title('Correlation Matrix', fontsize=17);
+```
+
+The highest correlation—44%—is between credit rating and the number of properties owned. This indicator likely carries significant weight when calculating the rating. We also see an average correlation (36%) between rating and churn, with a high rating corresponding to high churn.
+
+We also see an average correlation of 33% between balance and salary. Also, having a credit card has an average negative correlation with churn.
+
+After calculating the correlation matrix, we decided to calculate the phik correlation matrix to better understand the relationships between features, especially since some of them are categorical.
+
+```{python}
+#| echo: false
+#| output: false
+
+import phik
+phik = bd.phik_matrix()
+```
+
+```{python}
+#| error: true
+#| fig-cap: "Features influencing churn: Pearson vs Phik correlation"
+plt.figure(figsize=(8,7))
+plt.subplot(1, 2, 1)
+sns.heatmap(pd.DataFrame(corr['churn']).drop(index='churn').sort_values('churn', ascending=False), 
+                 annot=True, fmt='.0%', cmap='YlOrBr', cbar=False);
+plt.title('Features Influencing Churn (Pearson)', fontsize=17);
+
+plt.subplot(1, 2, 2)
+sns.heatmap(pd.DataFrame(phik['churn']).drop(index='churn').sort_values('churn', ascending=False), 
+                 annot=True, fmt='.0%', cmap='YlOrBr', cbar=False);
+plt.title('Features Influencing Churn (Phik)', fontsize=17);
+
+plt.tight_layout()
+plt.show()
 ```
 
 ## Key Findings
 
 ::: {.callout-tip}
 ## Main Insights
-- Older customers with higher balances were more likely to churn
-- Credit score alone was not a strong predictor of churn
-- Tenure played a significant role in customer retention
+
+- **Credit score** is the strongest churn driver — as scores increase, so does the churn rate
+- **Number of products** reveals a clear pattern: customers with 1 product have only 10% churn, those with 2 products almost never leave, but customers with 3-4 products churn almost entirely
+- **Age** shows increasing churn from age 20 to 40, a small spike at 55, and almost no churn after 60
+- **Recent activity** correlates with churn — likely because customers transfer funds before closing accounts
+- **Income and balance** — customers with fewer funds are less likely to churn, while those earning above 45,000 show higher churn rates
 :::
-
-## Methodology
-
-The analysis followed these steps:
-
-1. Data cleaning and preprocessing
-2. Exploratory data analysis with interactive visualisations
-3. Feature engineering
-4. Model training and evaluation
-
-> "The goal is not just to predict churn, but to understand *why* customers leave."
 
 ## Results
 
+The analysis revealed several actionable patterns for the bank's marketing department.
+
+The bank successfully attracts credit and salary-transfer customers, but struggles to retain clients with other products. Customers with 3-4 products are almost entirely churned, suggesting that beyond credit services, the bank's product offerings may not meet customer expectations.
+
+> The data suggests a critical gap: the bank lacks a compelling product for higher-income customers — the "upper middle class" segment earning above the regional average salary.
+
+The relationship between recent activity and churn is particularly interesting. Customers who were recently active are more likely to leave, which makes sense — before closing an account, customers typically transfer their funds to other banks. This activity spike could serve as an early warning signal for the retention team.
+
+::: {.callout-warning}
+## Recommendation
+The bank should focus on developing premium products for customers with higher incomes (above 45,000) and consider personalised retention strategies for customers aged 30-45, who represent the highest churn risk segment.
+:::
+
 ---
 
-*This project demonstrates the application of data science techniques to solve real-world business problems in the financial sector.*
+:::: {.columns}
+::: {.column width="50%"}
+:::
+::: {.column width="50%" style="text-align: right;"}
+[Next: Financial Data Analysis →](../project_2/index.qmd)
+:::
+::::
