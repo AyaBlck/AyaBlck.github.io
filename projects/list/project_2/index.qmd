@@ -3,7 +3,7 @@ title: "BERT vs LLaMA 3: Fake News Detection"
 description: "A comparative study of discriminative and generative AI models for detecting fake news, using fine-tuned BERT and few-shot LLaMA 3."
 author: "Alina Bolshakova"
 date: 2026-04-17
-image: project2.png
+image: /images/project_2.jpg
 categories: [Python, NLP, Machine Learning, Deep Learning]
 code-fold: true
 code-tools: true
