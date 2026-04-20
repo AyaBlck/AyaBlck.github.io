@@ -46,14 +46,14 @@
     "href": "projects/list/project_1/index.html",
     "title": "Churn Analysis for Bank Customers",
     "section": "",
-    "text": "This project analyses customer churn in the banking sector — identifying key factors that influence whether a customer leaves their bank.\n View full notebook on GitHub"
+    "text": "This project analyses customer churn in the banking sector by identifying key factors that influence whether a customer leaves the bank.\n View full notebook on GitHub"
   },
   {
     "objectID": "projects/list/project_1/index.html#overview",
     "href": "projects/list/project_1/index.html#overview",
     "title": "Churn Analysis for Bank Customers",
     "section": "",
-    "text": "This project analyses customer churn in the banking sector — identifying key factors that influence whether a customer leaves their bank.\n View full notebook on GitHub"
+    "text": "This project analyses customer churn in the banking sector by identifying key factors that influence whether a customer leaves the bank.\n View full notebook on GitHub"
   },
   {
     "objectID": "projects/list/project_1/index.html#data-loading-exploration",
@@ -67,7 +67,7 @@
     "href": "projects/list/project_1/index.html#data-quality-assessment",
     "title": "Churn Analysis for Bank Customers",
     "section": "Data Quality Assessment",
-    "text": "Data Quality Assessment\nWhile checking the statistics of the dataset, I noticed that some numerical features had extreme outliers, so I created boxplots to visualise the distribution of these features and identify the outliers that needed to be handled before proceeding with the analysis.\n\n\nCode\n# columns for boxplots\ncols = ['score',\n       'age',\n       'equity',\n       'balance',\n       'salary']\n\n# boxplots for numerical features\nplt.figure(figsize=(8,7))\nfor i, col in enumerate(cols):\n    sns.boxplot(bank_data[col], color=sns.color_palette('Set3')[i+1], ax=plt.subplot(3, 2, i+1))\n    plt.title('Boxplot for {}'.format(col), fontsize=17)\n    plt.xlabel(col)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\nAs expected, the balance sheet and salary data contain many outliers. The “equity” and “age” features also contain outliers, but they are few and small, so we decided to leave them unchanged. To more accurately determine which data to discard, we calculated the 95th, 97.5, and 99th percentiles. After this, we decided to discard balance and salary data at the 95th percentile."
+    "text": "Data Quality Assessment\nWhile checking the statistics of the dataset, we noticed that some numerical features had extreme outliers, so we created boxplots to visualise the distribution of these features and identify the outliers that needed to be handled before proceeding with the analysis.\n\n\nCode\n# columns for boxplots\ncols = ['score',\n       'age',\n       'equity',\n       'balance',\n       'salary']\n\n# boxplots for numerical features\nplt.figure(figsize=(8,7))\nfor i, col in enumerate(cols):\n    sns.boxplot(bank_data[col], color=sns.color_palette('Set3')[i+1], ax=plt.subplot(3, 2, i+1))\n    plt.title('Boxplot for {}'.format(col), fontsize=17)\n    plt.xlabel(col)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\nAs expected, the balance sheet and salary data contain many outliers. The “equity” and “age” features also contain outliers, but they are few and small, so we decided to leave them unchanged. To more accurately determine which data to discard, we calculated the 95th, 97.5, and 99th percentiles. After this, we decided to discard balance and salary data at the 95th percentile."
   },
   {
     "objectID": "projects/list/project_1/index.html#exploratory-data-analysis",

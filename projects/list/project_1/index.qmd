@@ -11,7 +11,7 @@ code-tools: true
 
 ## Overview
 
-This project analyses customer churn in the banking sector — identifying key factors that influence whether a customer leaves their bank. 
+This project analyses customer churn in the banking sector by identifying key factors that influence whether a customer leaves the bank. 
 
 {{< fa brands github >}} [View full notebook on GitHub](https://github.com/AyaBlck/Python_Projects/blob/main/bank_churn.ipynb){target=_blank}
 
@@ -35,7 +35,7 @@ bank_data.head()
 
 ## Data Quality Assessment
 
-While checking the statistics of the dataset, I noticed that some numerical features had extreme outliers, so I created boxplots to visualise the distribution of these features and identify the outliers that needed to be handled before proceeding with the analysis.
+While checking the statistics of the dataset, we noticed that some numerical features had extreme outliers, so we created boxplots to visualise the distribution of these features and identify the outliers that needed to be handled before proceeding with the analysis.
 
 ```{python}
 #| error: true
