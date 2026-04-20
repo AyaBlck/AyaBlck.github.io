@@ -412,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-loading-exploration" class="level2">
 <h2 class="anchored" data-anchor-id="data-loading-exploration">Data Loading &amp; Exploration</h2>
-<div id="0634fc18" class="cell" data-execution_count="1">
+<div id="e58e8c4e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -534,7 +534,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-quality-assessment" class="level2">
 <h2 class="anchored" data-anchor-id="data-quality-assessment">Data Quality Assessment</h2>
 <p>While checking the statistics of the dataset, we noticed that some numerical features had extreme outliers, so we created boxplots to visualise the distribution of these features and identify the outliers that needed to be handled before proceeding with the analysis.</p>
-<div id="a6950d98" class="cell" data-execution_count="2">
+<div id="833b54db" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># columns for boxplots</span></span>
@@ -566,7 +566,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="exploratory-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
 <p>The first step was to understand how each feature relates to customer churn. The two charts below highlight credit score and city distributions, which showed interesting initial patterns.</p>
-<div id="077260a0" class="cell" data-execution_count="3">
+<div id="f784cb90" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset preprocessing</span></span>
@@ -611,7 +611,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="3088bfa1" class="cell" data-execution_count="4">
+<div id="20ab041f" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">20</span>))</span>
@@ -638,7 +638,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Also we created a correlation matrix to understand the relationships between features and identify any multicollinearity issues.</p>
-<div id="35153177" class="cell" data-execution_count="5">
+<div id="9cadd80e" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># correlation matrix</span></span>
@@ -659,7 +659,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The highest correlation—44%—is between credit rating and the number of properties owned. This indicator likely carries significant weight when calculating the rating. We also see an average correlation (36%) between rating and churn, with a high rating corresponding to high churn.</p>
 <p>We also see an average correlation of 33% between balance and salary. Also, having a credit card has an average negative correlation with churn.</p>
 <p>After calculating the correlation matrix, we decided to calculate the phik correlation matrix to better understand the relationships between features, especially since some of them are categorical.</p>
-<div id="5036e042" class="cell" data-execution_count="7">
+<div id="f77420f4" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">7</span>))</span>
