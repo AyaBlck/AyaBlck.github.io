@@ -37,6 +37,48 @@ $font-size-base: 1rem;
 
 /*-- scss:rules --*/
 
+// Full-width centered landing page
+.quarto-about-broadside {
+  min-height: 85vh;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.quarto-about-broadside .about-main {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  grid-template-columns: 1fr !important;
+  gap: 0 !important;
+  flex: 0 !important;
+}
+
+.quarto-about-broadside .about-entity {
+  display: none !important;
+}
+
+.quarto-about-broadside .about-contents {
+  text-align: center !important;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.quarto-about-broadside .about-contents h2.title,
+.quarto-about-broadside #title-block-header .title {
+  font-size: 5rem !important;
+  white-space: nowrap;
+  margin-bottom: 1rem !important;
+}
+
+.quarto-about-broadside .about-links {
+  justify-content: center !important;
+  margin-top: 1.5rem !important;
+  padding: 0 !important;
+}
 // === GLOBAL ===
 // === GLOBAL ===
 body {
