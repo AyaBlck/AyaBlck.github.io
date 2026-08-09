@@ -4,6 +4,8 @@ project:
 
 website:
   title: "Alina Bolshakova"
+  site-url: https://ayablck.github.io
+  description: "Data and financial analyst — SQL, Python, machine learning."
   favicon: images/favicon-32x32.png
   navbar:
     logo: images/logo.png
@@ -13,13 +15,8 @@ website:
       - about.qmd
       - href: projects/index.qmd
         text: Projects
-      - href: reflection.qmd
-        text: Reflection
       - href: contact.qmd
         text: Contact
-      - href: cv/myCV.pdf # provide a relative file path to a pdf will open up a browser-based pdf viewer when clicked
-        text: CV
-        target: _blank # opens link (or page) in a new browser tab
       - icon: github # add icons as navbar buttons
         href: https://github.com/AyaBlck
         target: _blank
@@ -31,8 +28,8 @@ website:
 format:
   html:
     theme:
-      light: [cosmo, styles.scss]
       dark: [darkly, styles-dark.scss]
+      light: [cosmo, styles.scss]
     toc: true
 
 
