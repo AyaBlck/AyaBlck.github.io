@@ -369,7 +369,7 @@ pd.DataFrame([
      f"€{cur/n:.3f}", f"€{prop/n:.3f}", f"{d/n:+.3f}"],
     ["Total commission, month",
      f"€{cur:,.0f}", f"€{prop:,.0f}", f"{d:+,.0f} ({100*(prop/cur-1):+.1f}%)"],
-], columns=["", "Now", "After", "Change"])
+], columns=["", "AS IS", "TO BE", "Change"])
 ```
 
 ::: {.callout-tip}
