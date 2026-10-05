@@ -5,11 +5,11 @@ toc-location: left
 
 ## Background
 
-Hi, I'm Alina Bolshakova. I am a finance professional with 11 years of experience in financial planning, budgeting and modelling. Currently a Team Lead and Finance Business Partner, creating strategic plans and managing a team, also  building financial models with complex SQL queries, and translating numbers into actionable business strategies.
+Hi, I'm Alina Bolshakova. I am a finance data analyst with 11 years of experience in financial analysis, budgeting and modelling. Currently a Team Lead and Finance Business Partner, creating strategic plans and managing a team, also  building financial models with complex SQL queries, and translating numbers into actionable business strategies.
 
 ## Data Analysis
 
-I always was inspired by the power of data. And started learning Python and SQL 4 years ago. At my current position I combine financial expertise with data analysis. But I wanted to explore data science more deeply with machine learning and neural networks, which led me to pursuing MSc in Business Analytics in Dublin City University. I see this as my chance to connect traditional finance with data-driven approaches.
+I have always been inspired by the power of data, and started learning Python and SQL four years ago. At my current position I combine financial expertise with data analysis. But I wanted to explore data science more deeply with machine learning and neural networks, which led me to pursue an MSc in Business Analytics at Dublin City University. I see this as my chance to connect traditional finance with data-driven approaches.
 
 ## Skills
 
